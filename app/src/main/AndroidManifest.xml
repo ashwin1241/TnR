@@ -9,9 +9,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TnR">
-        <activity android:name=".Dashboard"
+        <activity android:name=".Lists"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:parentActivityName=".Dashboard"/>
+        <activity android:name=".Tasks"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".Dashboard"/>
+        <activity android:name=".Reminders"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".Dashboard"/>
+        <activity
+            android:name=".Dashboard"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".MainActivity"
             android:configChanges="orientation"

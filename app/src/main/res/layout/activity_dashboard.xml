@@ -6,6 +6,64 @@
     android:layout_height="match_parent"
     tools:context=".Dashboard">
 
+    <ImageButton
+        android:id="@+id/reminders"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/reminder"/>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/reminders"
+        android:layout_marginTop="10dp"
+        android:text="Reminders"
+        android:textAlignment="center"
+        android:textSize="23dp"
+        android:textColor="@color/title_color"
+        android:fontFamily="@font/amaranth"/>
+
+    <ImageButton
+        android:id="@+id/tasks"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/goal"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/tasks"
+        android:layout_marginTop="10dp"
+        android:text="Tasks"
+        android:textAlignment="center"
+        android:textSize="23dp"
+        android:textColor="@color/title_color"
+        android:fontFamily="@font/amaranth"/>
+
+    <ImageButton
+        android:id="@+id/lists"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="50dp"
+        android:background="@drawable/checklist"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/lists"
+        android:layout_marginTop="-40dp"
+        android:text="Lists"
+        android:textAlignment="center"
+        android:textSize="23dp"
+        android:textColor="@color/title_color"
+        android:fontFamily="@font/amaranth"/>
 
 </RelativeLayout>
