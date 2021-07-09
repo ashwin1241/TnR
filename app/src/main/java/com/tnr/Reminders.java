@@ -1,8 +1,12 @@
 package com.tnr;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 public class Reminders extends AppCompatActivity {
 
@@ -12,5 +16,23 @@ public class Reminders extends AppCompatActivity {
         setContentView(R.layout.activity_reminders);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setTitle("Reminders");
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.reminder_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        switch (item.getItemId())
+        {
+            case R.id.search:
+            break;
+        }
+        return true;
     }
 }
