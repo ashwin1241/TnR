@@ -5,11 +5,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public class Reminders extends AppCompatActivity {
@@ -26,8 +32,11 @@ public class Reminders extends AppCompatActivity {
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setTitle("Reminders");
 
-        remlList = new ArrayList<Reminder_card_data>();
+        loadData();
         buildRecyclerView();
+
+        remlList.add(new Reminder_card_data("Title_1",remlList.size()+1));
+        remlList.add(new Reminder_card_data("Title_2",remlList.size()+1));
 
     }
 
@@ -45,6 +54,8 @@ public class Reminders extends AppCompatActivity {
         {
             case R.id.search:
             break;
+            case android.R.id.home: startActivity(new Intent(Reminders.this,Dashboard.class));
+            break;
         }
         return true;
     }
@@ -57,9 +68,6 @@ public class Reminders extends AppCompatActivity {
         rRecyclerView.setHasFixedSize(true);
         rRecyclerView.setLayoutManager(rLayoutManager);
         rRecyclerView.setAdapter(rAdapter);
-        remlList.add(new Reminder_card_data("Title_1",remlList.size()+1));
-        remlList.add(new Reminder_card_data("Title_2",remlList.size()+1));
-        rAdapter.notifyDataSetChanged();
 
         rAdapter.setOnItemClickListener(new Reminder_Adapter.OnItemClickListener() {
             @Override
@@ -75,13 +83,26 @@ public class Reminders extends AppCompatActivity {
 
     }
 
-    private void loadData(ArrayList<Reminder_card_data> rList)
+    private void loadData()
     {
-
+        SharedPreferences sharedPreferences = getSharedPreferences("reminder_activity_sp",MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = sharedPreferences.getString("doc_list",null);
+        Type type = new TypeToken<ArrayList<Reminder_card_data>>(){}.getType();
+        remlList = gson.fromJson(json,type);
+        if(remlList==null)
+        {
+            remlList = new ArrayList<Reminder_card_data>();
+        }
     }
 
-    private void saveData(ArrayList<Reminder_card_data> rList)
+    private void saveData()
     {
-
+        SharedPreferences sharedPreferences = getSharedPreferences("reminder_activity_sp",MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(remlList);
+        editor.putString("doc_list",json);
+        editor.apply();
     }
 }
