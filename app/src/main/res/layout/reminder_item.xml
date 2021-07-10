@@ -14,19 +14,34 @@
         android:layout_margin="2dp">
 
         <TextView
+            android:id="@+id/card_index"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="15dp"
+            android:layout_marginRight="5dp"
+            android:textSize="25dp"
+            android:text="i)"
+            android:fontFamily="@font/amaranth"
+            android:textColor="@color/black"/>
+
+        <TextView
             android:id="@+id/Title_card"
-            android:layout_width="300dp"
+            android:layout_width="wrap_content"
             android:layout_height="33dp"
+            android:maxWidth="290dp"
+            android:layout_toRightOf="@id/card_index"
+            android:layout_marginStart="5dp"
             android:layout_centerVertical="true"
             android:textSize="25dp"
             android:textColor="@color/black"
             android:text="Title"
-            android:layout_margin="10dp"
             android:fontFamily="@font/amaranth"
             android:maxLines="1"
             android:ellipsize="end"/>
 
         <ImageButton
+            android:id="@+id/card_delete"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_alignParentEnd="true"
