@@ -4,6 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Reminders">
+    tools:context=".Reminders"
+    android:background="@color/light_grey">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/reminder_rec_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <ImageButton
+        android:id="@+id/add_reminder"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:background="@drawable/custom_button_shape"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:src="@drawable/ic_round_add_40"
+        android:elevation="10dp"/>
 
 </RelativeLayout>
