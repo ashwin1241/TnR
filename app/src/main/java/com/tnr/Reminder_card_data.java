@@ -2,14 +2,19 @@ package com.tnr;
 
 public class Reminder_card_data {
 
+    private long id;
     private String title;
-    private int index;
-    private String data;
+    private String description;
+    private String date;
+    private String time;
 
-    public Reminder_card_data(String title1, int index1)
+    public Reminder_card_data(long id1, String title1, String description1,String date1, String time1)
     {
+        this.id = id1;
         this.title = title1;
-        this.index = index1;
+        this.description = description1;
+        this.date = date1;
+        this.time = time1;
     }
 
     public String getTitle() {
@@ -20,19 +25,35 @@ public class Reminder_card_data {
         this.title = title;
     }
 
-    public long getIndex() {
-        return index;
+    public String getDescription() {
+        return description;
     }
 
-    public void setIndex(int index) {
-        this.index = index;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public String getData() {
-        return data;
+    public long getId() {
+        return id;
     }
 
-    public void setData(String data) {
-        this.data = data;
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 }

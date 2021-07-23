@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Add_Reminder">
+
+    <TextView
+        android:id="@+id/rem_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/amaranth"
+        android:text="Select date:"
+        android:textSize="20dp"
+        android:textColor="@color/black"/>
+
+    <TextView
+        android:id="@+id/selected_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/rem_date"
+        android:text="DD/MM/YYYY"
+        android:layout_marginTop="33dp"
+        android:fontFamily="@font/amaranth"
+        android:layout_marginStart="30dp"
+        android:textSize="17dp"
+        android:textColor="@color/black"/>
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/date_chooser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/selected_date"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:text="Pick Date"
+        android:textAlignment="center"/>
+
+    <TextView
+        android:id="@+id/rem_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/date_chooser"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/amaranth"
+        android:text="Select time:"
+        android:textSize="20dp"
+        android:textColor="@color/black"/>
+
+    <TextView
+        android:id="@+id/selected_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/rem_time"
+        android:layout_below="@id/date_chooser"
+        android:text="HH:MM"
+        android:layout_marginTop="33dp"
+        android:fontFamily="@font/amaranth"
+        android:layout_marginStart="30dp"
+        android:textSize="17dp"
+        android:textColor="@color/black"/>
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/time_chooser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/selected_time"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:text="Pick Time"
+        android:textAlignment="center"/>
+
+    <TextView
+        android:id="@+id/rem_title_column"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/time_chooser"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/amaranth"
+        android:text="Title:"
+        android:textSize="20dp"
+        android:textColor="@color/black"/>
+
+    <EditText
+        android:id="@+id/rem_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:layout_toRightOf="@id/rem_title_column"
+        android:layout_marginStart="30dp"
+        android:layout_below="@id/time_chooser"
+        android:layout_marginTop="23dp"
+        android:fontFamily="@font/amaranth"
+        android:textSize="17dp"
+        android:textColor="@color/black"
+        android:hint="Title goes here"
+        android:maxLines="1"
+        android:ellipsize="end"/>
+
+    <TextView
+        android:id="@+id/rem_desc_column"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rem_title"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/amaranth"
+        android:text="Description:"
+        android:textSize="20dp"
+        android:textColor="@color/black"/>
+
+    <EditText
+        android:id="@+id/rem_desc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rem_desc_column"
+        android:fontFamily="@font/amaranth"
+        android:textSize="17dp"
+        android:textColor="@color/black"
+        android:hint="Description goes here"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:maxLines="7"
+        android:ellipsize="end"/>
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/save_changes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="Save"
+        android:textAlignment="center"
+        android:layout_marginStart="50dp"
+        android:layout_marginBottom="50dp"/>
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/discard_changes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:text="Discard"
+        android:textAlignment="center"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="50dp"/>
+
+</RelativeLayout>

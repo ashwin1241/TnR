@@ -1,16 +1,21 @@
 package com.tnr;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -24,6 +29,7 @@ public class Reminders extends AppCompatActivity {
     private RecyclerView rRecyclerView;
     private Reminder_Adapter rAdapter;
     private RecyclerView.LayoutManager rLayoutManager;
+    private ImageButton add_rem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,8 +41,13 @@ public class Reminders extends AppCompatActivity {
         loadData();
         buildRecyclerView();
 
-        remlList.add(new Reminder_card_data("Title_1",remlList.size()+1));
-        remlList.add(new Reminder_card_data("Title_2",remlList.size()+1));
+        add_rem = findViewById(R.id.add_reminder);
+        add_rem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                add_reminder_card(0);
+            }
+        });
 
     }
 
@@ -72,12 +83,14 @@ public class Reminders extends AppCompatActivity {
         rAdapter.setOnItemClickListener(new Reminder_Adapter.OnItemClickListener() {
             @Override
             public void OnItemClicked(int position) {
-
+                Intent intent = new Intent(Reminders.this,Reminder_Preview.class);
+                intent.putExtra("position",position);
+                startActivity(intent);
             }
 
             @Override
             public void OnDeleteClicked(int position) {
-
+                delete_reminder_card(position);
             }
         });
 
@@ -105,4 +118,34 @@ public class Reminders extends AppCompatActivity {
         editor.putString("doc_list",json);
         editor.apply();
     }
+
+    private void add_reminder_card(int position)
+    {
+        Intent intent = new Intent(Reminders.this,Add_Reminder.class);
+        startActivity(intent);
+    }
+
+    private void delete_reminder_card(int position)
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Delete reminder")
+        .setMessage("Are you sure you want to delete this reminder?")
+        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                remlList.remove(position);
+                rAdapter.notifyItemRemoved(position);
+                saveData();
+                Toast.makeText(Reminders.this, "Reminder deleted", Toast.LENGTH_SHORT).show();
+            }
+        })
+        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        builder.create().show();
+    }
+
 }

@@ -63,7 +63,7 @@ public class Reminder_Adapter extends RecyclerView.Adapter<Reminder_Adapter.Remi
     public void onBindViewHolder(@NonNull Reminder_Adapter.Reminder_View_Holder holder, int position) {
         Reminder_card_data currentCard = arrayList.get(position);
         holder.title.setText(currentCard.getTitle());
-        holder.index.setText(String.valueOf(currentCard.getIndex())+")");
+        holder.index.setText(String.valueOf(position+1)+")");
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
