@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 public class Reminder_Adapter extends RecyclerView.Adapter<Reminder_Adapter.Reminder_View_Holder> {
 
-    private ArrayList<Reminder_card_data> arrayList;
+    private ArrayList<Reminder_Card_Data> arrayList;
     private OnItemClickListener rListener;
     private Context rContext;
 
@@ -45,7 +45,7 @@ public class Reminder_Adapter extends RecyclerView.Adapter<Reminder_Adapter.Remi
         }
     }
 
-    public Reminder_Adapter(ArrayList<Reminder_card_data> list, Context context)
+    public Reminder_Adapter(ArrayList<Reminder_Card_Data> list, Context context)
     {
         this.arrayList = list;
         this.rContext = context;
@@ -61,7 +61,7 @@ public class Reminder_Adapter extends RecyclerView.Adapter<Reminder_Adapter.Remi
 
     @Override
     public void onBindViewHolder(@NonNull Reminder_Adapter.Reminder_View_Holder holder, int position) {
-        Reminder_card_data currentCard = arrayList.get(position);
+        Reminder_Card_Data currentCard = arrayList.get(position);
         holder.title.setText(currentCard.getTitle());
         holder.index.setText(String.valueOf(position+1)+")");
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -97,7 +97,7 @@ public class Reminder_Adapter extends RecyclerView.Adapter<Reminder_Adapter.Remi
         return arrayList.size();
     }
 
-    public void filterList(ArrayList<Reminder_card_data> filterList)
+    public void filterList(ArrayList<Reminder_Card_Data> filterList)
     {
         arrayList = filterList;
         notifyDataSetChanged();

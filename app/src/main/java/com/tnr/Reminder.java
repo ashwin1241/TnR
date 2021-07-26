@@ -25,7 +25,7 @@ import java.util.ArrayList;
 
 public class Reminder extends AppCompatActivity {
 
-    private ArrayList<Reminder_card_data> remlList;
+    private ArrayList<Reminder_Card_Data> remlList;
     private RecyclerView rRecyclerView;
     private Reminder_Adapter rAdapter;
     private RecyclerView.LayoutManager rLayoutManager;
@@ -83,7 +83,7 @@ public class Reminder extends AppCompatActivity {
         rAdapter.setOnItemClickListener(new Reminder_Adapter.OnItemClickListener() {
             @Override
             public void OnItemClicked(int position) {
-                Intent intent = new Intent(Reminder.this,Reminder_Preview.class);
+                Intent intent = new Intent(Reminder.this, Reminder_Preview.class);
                 intent.putExtra("card_id",remlList.get(position).getId());
                 startActivity(intent);
             }
@@ -101,11 +101,11 @@ public class Reminder extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences("reminder_activity_sp",MODE_PRIVATE);
         Gson gson = new Gson();
         String json = sharedPreferences.getString("doc_list",null);
-        Type type = new TypeToken<ArrayList<Reminder_card_data>>(){}.getType();
+        Type type = new TypeToken<ArrayList<Reminder_Card_Data>>(){}.getType();
         remlList = gson.fromJson(json,type);
         if(remlList==null)
         {
-            remlList = new ArrayList<Reminder_card_data>();
+            remlList = new ArrayList<Reminder_Card_Data>();
         }
     }
 

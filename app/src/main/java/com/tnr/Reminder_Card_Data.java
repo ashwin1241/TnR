@@ -1,6 +1,6 @@
 package com.tnr;
 
-public class Reminder_card_data {
+public class Reminder_Card_Data {
 
     private long id;
     private String title;
@@ -9,7 +9,7 @@ public class Reminder_card_data {
     private String time;
     private String time_offset;
 
-    public Reminder_card_data(long id1, String title1, String description1,String date1, String time1, String time_offset1)
+    public Reminder_Card_Data(long id1, String title1, String description1, String date1, String time1, String time_offset1)
     {
         this.id = id1;
         this.title = title1;

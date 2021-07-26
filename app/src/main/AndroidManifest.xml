@@ -14,9 +14,15 @@
             android:configChanges="orientation"
             android:parentActivityName=".Reminder"
             android:screenOrientation="portrait"/>
-        <activity android:name=".Add_Reminder"
+        <activity
+            android:name=".Reminder_Edit"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"/>
+            android:parentActivityName=".Reminder_Preview"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Add_Reminder"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Lists"
             android:configChanges="orientation"

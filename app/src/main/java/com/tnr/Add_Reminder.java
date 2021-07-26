@@ -28,7 +28,7 @@ import java.util.List;
 
 public class Add_Reminder extends AppCompatActivity {
 
-    private List<Reminder_card_data> remlList;
+    private List<Reminder_Card_Data> remlList;
     private TextView date;
     private TextView time;
     private ExtendedFloatingActionButton date_choose;
@@ -151,7 +151,7 @@ public class Add_Reminder extends AppCompatActivity {
             public void onClick(View v) {
                 if(!(rem_date==null||rem_time==null))
                 {
-                    remlList.add(remlList.size(),new Reminder_card_data(System.currentTimeMillis(),title.getText().toString().trim(),description.getText().toString().trim(),rem_date,rem_time,"0"));
+                    remlList.add(remlList.size(),new Reminder_Card_Data(System.currentTimeMillis(),title.getText().toString().trim(),description.getText().toString().trim(),rem_date,rem_time,"0"));
                     saveData();
                     Toast.makeText(Add_Reminder.this, "Reminder saved", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(Add_Reminder.this, Reminder.class);
@@ -172,11 +172,11 @@ public class Add_Reminder extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences("reminder_activity_sp",MODE_PRIVATE);
         Gson gson = new Gson();
         String json = sharedPreferences.getString("doc_list",null);
-        Type type = new TypeToken<ArrayList<Reminder_card_data>>(){}.getType();
+        Type type = new TypeToken<ArrayList<Reminder_Card_Data>>(){}.getType();
         remlList = gson.fromJson(json,type);
         if(remlList==null)
         {
-            remlList = new ArrayList<Reminder_card_data>();
+            remlList = new ArrayList<Reminder_Card_Data>();
         }
     }
 
