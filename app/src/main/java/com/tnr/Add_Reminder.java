@@ -22,7 +22,6 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -78,7 +77,7 @@ public class Add_Reminder extends AppCompatActivity {
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Intent intent = new Intent(Add_Reminder.this,Reminders.class);
+                        Intent intent = new Intent(Add_Reminder.this, Reminder.class);
                         startActivity(intent);
                     }
                 })
@@ -95,7 +94,36 @@ public class Add_Reminder extends AppCompatActivity {
                     public void onDateSet(DatePicker view, int year, int month, int day) {
                         month = month+1;
                         rem_date = day+"/"+month+"/"+year;
-                        date.setText(rem_date);
+                        String tempdate=day+" ";
+                        switch (month)
+                        {
+                            case 1: tempdate+="Jan";
+                                break;
+                            case 2: tempdate+="Feb";
+                                break;
+                            case 3: tempdate+="Mar";
+                                break;
+                            case 4: tempdate+="Apr";
+                                break;
+                            case 5: tempdate+="May";
+                                break;
+                            case 6: tempdate+="Jun";
+                                break;
+                            case 7: tempdate+="Jul";
+                                break;
+                            case 8: tempdate+="Aug";
+                                break;
+                            case 9: tempdate+="Sept";
+                                break;
+                            case 10: tempdate+="Oct";
+                                break;
+                            case 11: tempdate+="Nov";
+                                break;
+                            case 12: tempdate+="Dec";
+                                break;
+                        }
+                        tempdate+=", "+year;
+                        date.setText(tempdate);
                     }
                 },year,month,day);
                 datePickerDialog.show();
@@ -110,7 +138,7 @@ public class Add_Reminder extends AppCompatActivity {
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                         Calendar calendar1 = Calendar.getInstance();
                         calendar1.set(year,month,day,hourOfDay,minute);
-                        rem_time = String.valueOf(DateFormat.format("hh:mm",calendar1));
+                        rem_time = String.valueOf(DateFormat.format("HH:mm",calendar1));
                         time.setText(DateFormat.format("HH:mm",calendar1));
                     }
                 },0,0,true);
@@ -126,7 +154,7 @@ public class Add_Reminder extends AppCompatActivity {
                     remlList.add(remlList.size(),new Reminder_card_data(System.currentTimeMillis(),title.getText().toString().trim(),description.getText().toString().trim(),rem_date,rem_time));
                     saveData();
                     Toast.makeText(Add_Reminder.this, "Reminder saved", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(Add_Reminder.this,Reminders.class);
+                    Intent intent = new Intent(Add_Reminder.this, Reminder.class);
                     startActivity(intent);
                     finish();
                 }

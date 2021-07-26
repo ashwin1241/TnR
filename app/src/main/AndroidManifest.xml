@@ -12,7 +12,7 @@
         android:theme="@style/Theme.TnR">
         <activity android:name=".Reminder_Preview"
             android:configChanges="orientation"
-            android:parentActivityName=".Reminders"
+            android:parentActivityName=".Reminder"
             android:screenOrientation="portrait"/>
         <activity android:name=".Add_Reminder"
             android:configChanges="orientation"
@@ -28,7 +28,7 @@
             android:parentActivityName=".Dashboard"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Reminders"
+            android:name=".Reminder"
             android:configChanges="orientation"
             android:parentActivityName=".Dashboard"
             android:screenOrientation="portrait" />

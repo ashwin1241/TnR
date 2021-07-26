@@ -4,6 +4,102 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Reminder_Preview">
+    tools:context=".Reminder_Preview"
+    android:scrollbars="vertical">
+
+    <EditText
+        android:id="@+id/prev_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:textColor="@color/black"
+        android:textSize="25dp"
+        android:text="Title of reminder"
+        android:fontFamily="@font/amaranth_bold"/>
+
+    <TextView
+        android:id="@+id/prev_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="17dp"
+        android:layout_below="@id/prev_title"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:text="Date"
+        android:fontFamily="@font/amaranth"/>
+
+    <TextView
+        android:id="@+id/prev_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="17dp"
+        android:layout_below="@id/prev_title"
+        android:layout_toRightOf="@id/prev_date"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:text="Time"
+        android:fontFamily="@font/amaranth"/>
+
+    <ImageView
+        android:id="@+id/notif_bell"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_below="@id/prev_date"
+        android:layout_marginTop="50dp"
+        android:layout_marginStart="10dp"
+        android:src="@drawable/ic_outline_notifications_50"/>
+
+    <TextView
+        android:id="@+id/abcd1234"
+        android:layout_below="@id/prev_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:layout_toRightOf="@id/notif_bell"
+        android:layout_marginStart="20dp"
+        android:text="Notify before: "
+        android:textSize="17dp"
+        android:fontFamily="@font/amaranth"/>
+
+    <EditText
+        android:id="@+id/time_offset_for_rem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/prev_date"
+        android:layout_marginTop="50dp"
+        android:layout_toRightOf="@id/abcd1234"
+        android:layout_marginStart="10dp"
+        android:inputType="number"
+        android:maxLines="1"
+        android:fontFamily="@font/amaranth_bold"
+        android:textSize="17dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/prev_date"
+        android:layout_marginTop="60dp"
+        android:layout_toRightOf="@id/time_offset_for_rem"
+        android:layout_marginStart="10dp"
+        android:text="minutes"
+        android:textSize="17dp"
+        android:fontFamily="@font/amaranth"/>
+
+    <EditText
+        android:id="@+id/prev_desc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/notif_bell"
+        android:layout_marginTop="50dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:textSize="20dp"
+        android:maxLines="7"
+        android:ellipsize="end"
+        android:hint="Decription goes here"
+        android:fontFamily="@font/amaranth"
+        android:textColor="@color/black"/>
 
 </RelativeLayout>

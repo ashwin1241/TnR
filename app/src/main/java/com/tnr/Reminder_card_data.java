@@ -7,6 +7,7 @@ public class Reminder_card_data {
     private String description;
     private String date;
     private String time;
+    private String time_offset;
 
     public Reminder_card_data(long id1, String title1, String description1,String date1, String time1)
     {
@@ -55,5 +56,13 @@ public class Reminder_card_data {
 
     public void setTime(String time) {
         this.time = time;
+    }
+
+    public String getTime_offset() {
+        return time_offset;
+    }
+
+    public void setTime_offset(String time_offset) {
+        this.time_offset = time_offset;
     }
 }
