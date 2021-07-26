@@ -141,7 +141,7 @@ public class Add_Reminder extends AppCompatActivity {
                         rem_time = String.valueOf(DateFormat.format("HH:mm",calendar1));
                         time.setText(DateFormat.format("HH:mm",calendar1));
                     }
-                },0,0,true);
+                },Calendar.getInstance().get(Calendar.HOUR_OF_DAY),Calendar.getInstance().get(Calendar.MINUTE),true);
                 timePickerDialog.show();
             }
         });
@@ -151,7 +151,7 @@ public class Add_Reminder extends AppCompatActivity {
             public void onClick(View v) {
                 if(!(rem_date==null||rem_time==null))
                 {
-                    remlList.add(remlList.size(),new Reminder_card_data(System.currentTimeMillis(),title.getText().toString().trim(),description.getText().toString().trim(),rem_date,rem_time));
+                    remlList.add(remlList.size(),new Reminder_card_data(System.currentTimeMillis(),title.getText().toString().trim(),description.getText().toString().trim(),rem_date,rem_time,"0"));
                     saveData();
                     Toast.makeText(Add_Reminder.this, "Reminder saved", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(Add_Reminder.this, Reminder.class);

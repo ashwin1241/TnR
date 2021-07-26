@@ -9,13 +9,14 @@ public class Reminder_card_data {
     private String time;
     private String time_offset;
 
-    public Reminder_card_data(long id1, String title1, String description1,String date1, String time1)
+    public Reminder_card_data(long id1, String title1, String description1,String date1, String time1, String time_offset1)
     {
         this.id = id1;
         this.title = title1;
         this.description = description1;
         this.date = date1;
         this.time = time1;
+        this.time_offset = time_offset1;
     }
 
     public String getTitle() {
