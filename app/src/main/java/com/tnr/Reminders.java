@@ -23,11 +23,11 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
-public class Reminder extends AppCompatActivity {
+public class Reminders extends AppCompatActivity {
 
-    private ArrayList<Reminder_Card_Data> remlList;
+    private ArrayList<Reminders_Card_Data> remlList;
     private RecyclerView rRecyclerView;
-    private Reminder_Adapter rAdapter;
+    private Reminders_Adapter rAdapter;
     private RecyclerView.LayoutManager rLayoutManager;
     private ImageButton add_rem;
 
@@ -54,7 +54,7 @@ public class Reminder extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.reminder_menu, menu);
+        menuInflater.inflate(R.menu.search_menu, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -65,7 +65,7 @@ public class Reminder extends AppCompatActivity {
         {
             case R.id.search:
             break;
-            case android.R.id.home: startActivity(new Intent(Reminder.this,Dashboard.class));
+            case android.R.id.home: startActivity(new Intent(Reminders.this,Dashboard.class));
             break;
         }
         return true;
@@ -75,15 +75,15 @@ public class Reminder extends AppCompatActivity {
     {
         rRecyclerView = findViewById(R.id.reminder_rec_view);
         rLayoutManager = new LinearLayoutManager(this);
-        rAdapter = new Reminder_Adapter(remlList, Reminder.this);
+        rAdapter = new Reminders_Adapter(remlList, Reminders.this);
         rRecyclerView.setHasFixedSize(true);
         rRecyclerView.setLayoutManager(rLayoutManager);
         rRecyclerView.setAdapter(rAdapter);
 
-        rAdapter.setOnItemClickListener(new Reminder_Adapter.OnItemClickListener() {
+        rAdapter.setOnItemClickListener(new Reminders_Adapter.OnItemClickListener() {
             @Override
             public void OnItemClicked(int position) {
-                Intent intent = new Intent(Reminder.this, Reminder_Preview.class);
+                Intent intent = new Intent(Reminders.this, Reminders_Preview.class);
                 intent.putExtra("card_id",remlList.get(position).getId());
                 startActivity(intent);
             }
@@ -100,12 +100,12 @@ public class Reminder extends AppCompatActivity {
     {
         SharedPreferences sharedPreferences = getSharedPreferences("reminder_activity_sp",MODE_PRIVATE);
         Gson gson = new Gson();
-        String json = sharedPreferences.getString("doc_list",null);
-        Type type = new TypeToken<ArrayList<Reminder_Card_Data>>(){}.getType();
+        String json = sharedPreferences.getString("rem_list",null);
+        Type type = new TypeToken<ArrayList<Reminders_Card_Data>>(){}.getType();
         remlList = gson.fromJson(json,type);
         if(remlList==null)
         {
-            remlList = new ArrayList<Reminder_Card_Data>();
+            remlList = new ArrayList<Reminders_Card_Data>();
         }
     }
 
@@ -115,13 +115,13 @@ public class Reminder extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         Gson gson = new Gson();
         String json = gson.toJson(remlList);
-        editor.putString("doc_list",json);
+        editor.putString("rem_list",json);
         editor.apply();
     }
 
     private void add_reminder_card(int position)
     {
-        Intent intent = new Intent(Reminder.this,Add_Reminder.class);
+        Intent intent = new Intent(Reminders.this,Add_Reminder.class);
         startActivity(intent);
     }
 
@@ -136,7 +136,7 @@ public class Reminder extends AppCompatActivity {
                 remlList.remove(position);
                 rAdapter.notifyItemRemoved(position);
                 saveData();
-                Toast.makeText(Reminder.this, "Reminder deleted", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Reminders.this, "Reminder deleted", Toast.LENGTH_SHORT).show();
             }
         })
         .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

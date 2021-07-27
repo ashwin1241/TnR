@@ -27,9 +27,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public class Reminder_Edit extends AppCompatActivity {
+public class Reminders_Edit extends AppCompatActivity {
 
-    private List<Reminder_Card_Data> remlList;
+    private List<Reminders_Card_Data> remlList;
     private int position;
     private long card_id;
     private EditText edit_title;
@@ -120,7 +120,7 @@ public class Reminder_Edit extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_reminder_edit);
+        setContentView(R.layout.activity_reminders_edit);
         getSupportActionBar().setHomeButtonEnabled(true);
 
         loadData();
@@ -150,7 +150,7 @@ public class Reminder_Edit extends AppCompatActivity {
         edit_desc = findViewById(R.id.edit_desc);
 
         edit_title.setText(remlList.get(position).getTitle());
-        String tempdate=day+" ";
+        String tempdate="";
         switch (month)
         {
             case 0: tempdate+="Jan";
@@ -178,7 +178,7 @@ public class Reminder_Edit extends AppCompatActivity {
             case 11: tempdate+="Dec";
                 break;
         }
-        tempdate+=", "+year;
+        tempdate+=" "+day+", "+year;
         edit_date.setText(tempdate);
         edit_time.setText(remlList.get(position).getTime());
         time_offset.setText(remlList.get(position).getTime_offset());
@@ -187,7 +187,7 @@ public class Reminder_Edit extends AppCompatActivity {
         edit_time.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TimePickerDialog timePickerDialog = new TimePickerDialog(Reminder_Edit.this, new TimePickerDialog.OnTimeSetListener() {
+                TimePickerDialog timePickerDialog = new TimePickerDialog(Reminders_Edit.this, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                         Calendar calendar1 = Calendar.getInstance();
@@ -202,12 +202,12 @@ public class Reminder_Edit extends AppCompatActivity {
         edit_date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DatePickerDialog datePickerDialog = new DatePickerDialog(Reminder_Edit.this, new DatePickerDialog.OnDateSetListener() {
+                DatePickerDialog datePickerDialog = new DatePickerDialog(Reminders_Edit.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int day) {
                         month = month+1;
                         rem_date = day+"/"+month+"/"+year;
-                        String tempdate=day+" ";
+                        String tempdate="";
                         switch (month)
                         {
                             case 1: tempdate+="Jan";
@@ -235,7 +235,7 @@ public class Reminder_Edit extends AppCompatActivity {
                             case 12: tempdate+="Dec";
                                 break;
                         }
-                        tempdate+=", "+year;
+                        tempdate+=" "+day+", "+year;
                         edit_date.setText(tempdate);
                     }
                 },year,month,day);
@@ -248,7 +248,7 @@ public class Reminder_Edit extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.reminder_edit, menu);
+        menuInflater.inflate(R.menu.edit_menu, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -259,7 +259,7 @@ public class Reminder_Edit extends AppCompatActivity {
         {
             case R.id.save_edited_rem: save_rem_edits();
                 break;
-            case android.R.id.home: startActivity(new Intent(Reminder_Edit.this, Reminder_Preview.class));
+            case android.R.id.home: startActivity(new Intent(Reminders_Edit.this, Reminders_Preview.class));
                 break;
         }
         return true;
@@ -269,12 +269,12 @@ public class Reminder_Edit extends AppCompatActivity {
     {
         SharedPreferences sharedPreferences = getSharedPreferences("reminder_activity_sp",MODE_PRIVATE);
         Gson gson = new Gson();
-        String json = sharedPreferences.getString("doc_list",null);
-        Type type = new TypeToken<ArrayList<Reminder_Card_Data>>(){}.getType();
+        String json = sharedPreferences.getString("rem_list",null);
+        Type type = new TypeToken<ArrayList<Reminders_Card_Data>>(){}.getType();
         remlList = gson.fromJson(json,type);
         if(remlList==null)
         {
-            remlList = new ArrayList<Reminder_Card_Data>();
+            remlList = new ArrayList<Reminders_Card_Data>();
         }
     }
 
@@ -284,7 +284,7 @@ public class Reminder_Edit extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         Gson gson = new Gson();
         String json = gson.toJson(remlList);
-        editor.putString("doc_list",json);
+        editor.putString("rem_list",json);
         editor.apply();
     }
 
@@ -297,7 +297,7 @@ public class Reminder_Edit extends AppCompatActivity {
         remlList.get(position).setTime_offset(time_offset.getText().toString().trim());
         saveData();
         Toast.makeText(this, "Edits saved", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(Reminder_Edit.this,Reminder_Preview.class);
+        Intent intent = new Intent(Reminders_Edit.this, Reminders_Preview.class);
         intent.putExtra("card_id",remlList.get(position).getId());
         startActivity(intent);
         finish();

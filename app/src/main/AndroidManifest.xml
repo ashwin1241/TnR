@@ -10,14 +10,40 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TnR">
-        <activity android:name=".Reminder_Preview"
-            android:configChanges="orientation"
-            android:parentActivityName=".Reminder"
-            android:screenOrientation="portrait"/>
         <activity
-            android:name=".Reminder_Edit"
+            android:name=".Lists_Edit"
             android:configChanges="orientation"
-            android:parentActivityName=".Reminder_Preview"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".Lists"/>
+        <activity
+            android:name=".Add_List"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".Lists"/>
+        <activity
+            android:name=".Add_Task"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".Tasks"/>
+        <activity
+            android:name=".Tasks_Preview"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".Tasks"/>
+        <activity
+            android:name=".Tasks_Edit"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".Tasks_Preview"/>
+        <activity
+            android:name=".Reminders_Preview"
+            android:configChanges="orientation"
+            android:parentActivityName=".Reminders"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Reminders_Edit"
+            android:configChanges="orientation"
+            android:parentActivityName=".Reminders_Preview"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Add_Reminder"
@@ -34,7 +60,7 @@
             android:parentActivityName=".Dashboard"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Reminder"
+            android:name=".Reminders"
             android:configChanges="orientation"
             android:parentActivityName=".Dashboard"
             android:screenOrientation="portrait" />

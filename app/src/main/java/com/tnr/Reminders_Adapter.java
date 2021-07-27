@@ -12,9 +12,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class Reminder_Adapter extends RecyclerView.Adapter<Reminder_Adapter.Reminder_View_Holder> {
+public class Reminders_Adapter extends RecyclerView.Adapter<Reminders_Adapter.Reminder_View_Holder> {
 
-    private ArrayList<Reminder_Card_Data> arrayList;
+    private ArrayList<Reminders_Card_Data> arrayList;
     private OnItemClickListener rListener;
     private Context rContext;
 
@@ -45,7 +45,7 @@ public class Reminder_Adapter extends RecyclerView.Adapter<Reminder_Adapter.Remi
         }
     }
 
-    public Reminder_Adapter(ArrayList<Reminder_Card_Data> list, Context context)
+    public Reminders_Adapter(ArrayList<Reminders_Card_Data> list, Context context)
     {
         this.arrayList = list;
         this.rContext = context;
@@ -54,14 +54,14 @@ public class Reminder_Adapter extends RecyclerView.Adapter<Reminder_Adapter.Remi
     @NonNull
     @Override
     public Reminder_View_Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.reminder_item,parent,false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.reminders_item,parent,false);
         Reminder_View_Holder rvh = new Reminder_View_Holder(v);
         return rvh;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull Reminder_Adapter.Reminder_View_Holder holder, int position) {
-        Reminder_Card_Data currentCard = arrayList.get(position);
+    public void onBindViewHolder(@NonNull Reminders_Adapter.Reminder_View_Holder holder, int position) {
+        Reminders_Card_Data currentCard = arrayList.get(position);
         holder.title.setText(currentCard.getTitle());
         holder.index.setText(String.valueOf(position+1)+")");
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -97,7 +97,7 @@ public class Reminder_Adapter extends RecyclerView.Adapter<Reminder_Adapter.Remi
         return arrayList.size();
     }
 
-    public void filterList(ArrayList<Reminder_Card_Data> filterList)
+    public void filterList(ArrayList<Reminders_Card_Data> filterList)
     {
         arrayList = filterList;
         notifyDataSetChanged();

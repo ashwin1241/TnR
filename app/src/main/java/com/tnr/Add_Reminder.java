@@ -28,7 +28,7 @@ import java.util.List;
 
 public class Add_Reminder extends AppCompatActivity {
 
-    private List<Reminder_Card_Data> remlList;
+    private List<Reminders_Card_Data> remlList;
     private TextView date;
     private TextView time;
     private ExtendedFloatingActionButton date_choose;
@@ -77,7 +77,7 @@ public class Add_Reminder extends AppCompatActivity {
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Intent intent = new Intent(Add_Reminder.this, Reminder.class);
+                        Intent intent = new Intent(Add_Reminder.this, Reminders.class);
                         startActivity(intent);
                     }
                 })
@@ -94,7 +94,7 @@ public class Add_Reminder extends AppCompatActivity {
                     public void onDateSet(DatePicker view, int year, int month, int day) {
                         month = month+1;
                         rem_date = day+"/"+month+"/"+year;
-                        String tempdate=day+" ";
+                        String tempdate="";
                         switch (month)
                         {
                             case 1: tempdate+="Jan";
@@ -122,7 +122,7 @@ public class Add_Reminder extends AppCompatActivity {
                             case 12: tempdate+="Dec";
                                 break;
                         }
-                        tempdate+=", "+year;
+                        tempdate+=" "+day+", "+year;
                         date.setText(tempdate);
                     }
                 },year,month,day);
@@ -151,10 +151,10 @@ public class Add_Reminder extends AppCompatActivity {
             public void onClick(View v) {
                 if(!(rem_date==null||rem_time==null))
                 {
-                    remlList.add(remlList.size(),new Reminder_Card_Data(System.currentTimeMillis(),title.getText().toString().trim(),description.getText().toString().trim(),rem_date,rem_time,"0"));
+                    remlList.add(remlList.size(),new Reminders_Card_Data(System.currentTimeMillis(),title.getText().toString().trim(),description.getText().toString().trim(),rem_date,rem_time,"0"));
                     saveData();
                     Toast.makeText(Add_Reminder.this, "Reminder saved", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(Add_Reminder.this, Reminder.class);
+                    Intent intent = new Intent(Add_Reminder.this, Reminders.class);
                     startActivity(intent);
                     finish();
                 }
@@ -171,12 +171,12 @@ public class Add_Reminder extends AppCompatActivity {
     {
         SharedPreferences sharedPreferences = getSharedPreferences("reminder_activity_sp",MODE_PRIVATE);
         Gson gson = new Gson();
-        String json = sharedPreferences.getString("doc_list",null);
-        Type type = new TypeToken<ArrayList<Reminder_Card_Data>>(){}.getType();
+        String json = sharedPreferences.getString("rem_list",null);
+        Type type = new TypeToken<ArrayList<Reminders_Card_Data>>(){}.getType();
         remlList = gson.fromJson(json,type);
         if(remlList==null)
         {
-            remlList = new ArrayList<Reminder_Card_Data>();
+            remlList = new ArrayList<Reminders_Card_Data>();
         }
     }
 
@@ -186,7 +186,7 @@ public class Add_Reminder extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         Gson gson = new Gson();
         String json = gson.toJson(remlList);
-        editor.putString("doc_list",json);
+        editor.putString("rem_list",json);
         editor.apply();
     }
 

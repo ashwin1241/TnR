@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
@@ -17,10 +16,10 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Reminder_Preview extends AppCompatActivity {
+public class Reminders_Preview extends AppCompatActivity {
 
     private ExtendedFloatingActionButton edit;
-    private List<Reminder_Card_Data> remlList;
+    private List<Reminders_Card_Data> remlList;
     private long card_id;
     private int position;
     private TextView prev_title;
@@ -81,7 +80,7 @@ public class Reminder_Preview extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_reminder_preview);
+        setContentView(R.layout.activity_reminders_preview);
         getSupportActionBar().setHomeButtonEnabled(true);
 
         loadData();
@@ -108,7 +107,7 @@ public class Reminder_Preview extends AppCompatActivity {
         edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Reminder_Preview.this, Reminder_Edit.class);
+                Intent intent = new Intent(Reminders_Preview.this, Reminders_Edit.class);
                 intent.putExtra("card_id",remlList.get(position).getId());
                 startActivity(intent);
             }
@@ -119,7 +118,7 @@ public class Reminder_Preview extends AppCompatActivity {
         time_offset = findViewById(R.id.time_offset_for_rem_prev);
         prev_desc = findViewById(R.id.prev_desc);
 
-        String tempdate=day+" ";
+        String tempdate="";
         switch (month)
         {
             case 0: tempdate+="Jan";
@@ -147,7 +146,7 @@ public class Reminder_Preview extends AppCompatActivity {
             case 11: tempdate+="Dec";
                 break;
         }
-        tempdate+=", "+year;
+        tempdate+=" "+day+", "+year;
         prev_date.setText(tempdate);
         prev_time.setText(remlList.get(position).getTime());
         prev_title.setText(remlList.get(position).getTitle());
@@ -160,12 +159,12 @@ public class Reminder_Preview extends AppCompatActivity {
     {
         SharedPreferences sharedPreferences = getSharedPreferences("reminder_activity_sp",MODE_PRIVATE);
         Gson gson = new Gson();
-        String json = sharedPreferences.getString("doc_list",null);
-        Type type = new TypeToken<ArrayList<Reminder_Card_Data>>(){}.getType();
+        String json = sharedPreferences.getString("rem_list",null);
+        Type type = new TypeToken<ArrayList<Reminders_Card_Data>>(){}.getType();
         remlList = gson.fromJson(json,type);
         if(remlList==null)
         {
-            remlList = new ArrayList<Reminder_Card_Data>();
+            remlList = new ArrayList<Reminders_Card_Data>();
         }
     }
 
