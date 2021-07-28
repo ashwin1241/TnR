@@ -94,7 +94,11 @@ public class Tasks extends AppCompatActivity {
 
             @Override
             public void OnItemShared(int position) {
-                Toast.makeText(Tasks.this, "Share clicked!", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(Intent.ACTION_SEND);
+                intent.setType("text/plain");
+                intent.putExtra(Intent.EXTRA_SUBJECT,tskList.get(position).getTitle());
+                intent.putExtra(Intent.EXTRA_TEXT,tskList.get(position).getTitle()+"\n\n"+tskList.get(position).getDescription());
+                startActivity(Intent.createChooser(intent,"Share note with.."));
             }
         });
 
