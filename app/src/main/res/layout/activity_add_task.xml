@@ -1,10 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".Add_Task"
-    android:scrollbars="vertical">
+    android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/task_add_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="40dp"
+        android:hint="Title of task"
+        android:fontFamily="@font/amaranth_bold"
+        android:textColor="@color/black"
+        android:textSize="25dp"/>
+
+    <ImageView
+        android:id="@+id/line_separator"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_svg__2_"
+        android:layout_below="@id/task_add_title"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="10dp"/>
+
+    <EditText
+        android:id="@+id/task_add_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/line_separator"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:textSize="20dp"
+        android:fontFamily="@font/amaranth"
+        android:textColor="@color/black"
+        android:hint="Description goes here"/>
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/save_changes1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="Save"
+        android:textAlignment="center"
+        android:layout_marginStart="50dp"
+        android:layout_marginBottom="50dp"/>
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/discard_changes1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:text="Discard"
+        android:textAlignment="center"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="50dp"/>
 
 </RelativeLayout>

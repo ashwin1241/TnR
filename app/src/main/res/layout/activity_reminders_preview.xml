@@ -98,7 +98,7 @@
         android:textSize="20dp"
         android:maxLines="7"
         android:ellipsize="end"
-        android:hint="Decription goes here"
+        android:text="Description goes here"
         android:fontFamily="@font/amaranth"
         android:textColor="@color/black"/>
 

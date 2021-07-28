@@ -52,7 +52,7 @@
             android:layout_marginEnd="5dp"
             android:textSize="16dp"
             android:fontFamily="@font/amaranth"
-            android:text="Jul 27,2021 ; 15:10"/>
+            android:text="Jul 27, 2021 ; 15:10"/>
 
         <ImageView
             android:id="@+id/tsk_card_delete"

@@ -7,4 +7,39 @@
     tools:context=".Tasks_Edit"
     android:scrollbars="vertical">
 
+    <EditText
+        android:id="@+id/task_edit_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="40dp"
+        android:hint="Title of task"
+        android:fontFamily="@font/amaranth_bold"
+        android:textColor="@color/black"
+        android:textSize="25dp"/>
+
+    <ImageView
+        android:id="@+id/line_separator"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_svg__2_"
+        android:layout_below="@id/task_edit_title"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="10dp"/>
+
+    <EditText
+        android:id="@+id/task_edit_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/line_separator"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:textSize="20dp"
+        android:fontFamily="@font/amaranth"
+        android:textColor="@color/black"
+        android:hint="Description goes here"/>
+
 </RelativeLayout>

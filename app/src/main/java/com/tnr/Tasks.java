@@ -45,41 +45,9 @@ public class Tasks extends AppCompatActivity {
         add_tsk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                tsk_time = Calendar.getInstance().get(Calendar.HOUR_OF_DAY)+":"+Calendar.getInstance().get(Calendar.MINUTE);
-                int month = Calendar.getInstance().get(Calendar.MONTH);
-                tsk_date="";
-                switch (month)
-                {
-                    case 0: tsk_date+="Jan";
-                        break;
-                    case 1: tsk_date+="Feb";
-                        break;
-                    case 2: tsk_date+="Mar";
-                        break;
-                    case 3: tsk_date+="Apr";
-                        break;
-                    case 4: tsk_date+="May";
-                        break;
-                    case 5: tsk_date+="Jun";
-                        break;
-                    case 6: tsk_date+="Jul";
-                        break;
-                    case 7: tsk_date+="Aug";
-                        break;
-                    case 8: tsk_date+="Sept";
-                        break;
-                    case 9: tsk_date+="Oct";
-                        break;
-                    case 10: tsk_date+="Nov";
-                        break;
-                    case 11: tsk_date+="Dec";
-                        break;
-                }
-                tsk_date+=" "+Calendar.getInstance().get(Calendar.DAY_OF_MONTH)+", "+Calendar.getInstance().get(Calendar.YEAR);
-                tskList.add(tskList.size(),new Tasks_Card_Data(System.currentTimeMillis(),"New Title","New Description",tsk_date,tsk_time));
-                tAdapter.notifyItemInserted(tskList.size());
-                saveData();
-                Toast.makeText(Tasks.this, "Task added", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(Tasks.this,Add_Task.class);
+                intent.putExtra("card_id",System.currentTimeMillis());
+                startActivity(intent);
             }
         });
     }

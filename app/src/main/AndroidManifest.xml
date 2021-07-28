@@ -18,13 +18,11 @@
         <activity
             android:name=".Add_List"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".Lists"/>
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Add_Task"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".Tasks"/>
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Tasks_Preview"
             android:configChanges="orientation"

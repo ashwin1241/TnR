@@ -259,7 +259,9 @@ public class Reminders_Edit extends AppCompatActivity {
         {
             case R.id.save_edited_rem: save_rem_edits();
                 break;
-            case android.R.id.home: startActivity(new Intent(Reminders_Edit.this, Reminders_Preview.class));
+            case android.R.id.home: Intent intent = new Intent(Reminders_Edit.this,Reminders_Preview.class);
+                                    intent.putExtra("card_id",remlList.get(position).getId());
+                                    startActivity(intent);
                 break;
         }
         return true;

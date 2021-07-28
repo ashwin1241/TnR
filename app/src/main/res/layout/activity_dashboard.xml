@@ -7,64 +7,115 @@
     tools:context=".Dashboard"
     android:scrollbars="vertical">
 
-    <ImageButton
-        android:id="@+id/reminders"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
-        android:background="@drawable/reminder"/>
-
-    <TextView
-        android:layout_width="wrap_content"
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/reminders"
-        android:layout_marginTop="10dp"
-        android:text="Reminders"
-        android:textAlignment="center"
-        android:textSize="23dp"
-        android:textColor="@color/title_color"
-        android:fontFamily="@font/amaranth"/>
+        android:layout_alignParentTop="true"
+        android:id="@+id/card1"
+        app:cardElevation="0dp">
 
-    <ImageButton
-        android:id="@+id/tasks"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_centerInParent="true"
-        android:background="@drawable/goal"/>
+        <RelativeLayout
+            android:id="@+id/rel_lay_inner1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
+            <ImageButton
+                android:id="@+id/reminders"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/reminder"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/reminders"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:text="Reminders"
+                android:textAlignment="center"
+                android:textSize="23dp"
+                android:textColor="@color/title_color"
+                android:fontFamily="@font/amaranth"/>
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/tasks"
-        android:layout_marginTop="10dp"
-        android:text="Tasks"
-        android:textAlignment="center"
-        android:textSize="23dp"
-        android:textColor="@color/title_color"
-        android:fontFamily="@font/amaranth"/>
+        android:id="@+id/card2"
+        android:layout_below="@id/card1"
+        app:cardElevation="0dp">
 
-    <ImageButton
-        android:id="@+id/lists"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="50dp"
-        android:background="@drawable/checklist"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/rel_lay_inner2">
 
-    <TextView
-        android:layout_width="wrap_content"
+            <ImageButton
+                android:id="@+id/tasks"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/goal"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/tasks"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:text="Tasks"
+                android:textAlignment="center"
+                android:textSize="23dp"
+                android:textColor="@color/title_color"
+                android:fontFamily="@font/amaranth"/>
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/lists"
-        android:layout_marginTop="-40dp"
-        android:text="Lists"
-        android:textAlignment="center"
-        android:textSize="23dp"
-        android:textColor="@color/title_color"
-        android:fontFamily="@font/amaranth"/>
+        android:id="@+id/card3"
+        android:layout_below="@id/card2"
+        app:cardElevation="0dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/rel_lay_inner3">
+
+            <ImageButton
+                android:id="@+id/lists"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/checklist"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/lists"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:text="Lists"
+                android:textAlignment="center"
+                android:textSize="23dp"
+                android:textColor="@color/title_color"
+                android:fontFamily="@font/amaranth"/>
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
 
 </RelativeLayout>
