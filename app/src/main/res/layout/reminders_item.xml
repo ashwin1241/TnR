@@ -28,7 +28,7 @@
         <TextView
             android:id="@+id/Title_card"
             android:layout_width="wrap_content"
-            android:layout_height="33dp"
+            android:layout_height="wrap_content"
             android:maxWidth="290dp"
             android:layout_toRightOf="@id/card_index"
             android:layout_marginStart="5dp"

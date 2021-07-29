@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -40,7 +41,7 @@ public class Lists extends AppCompatActivity {
         add_lst.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                lstList.add(lstList.size(),new Lists_Card_Data(System.currentTimeMillis(),"New Item"));
+                lstList.add(lstList.size(),new Lists_Card_Data(System.currentTimeMillis(),"New List"));
                 lAdapter.notifyItemInserted(lstList.size());
                 saveData();
             }
@@ -60,13 +61,16 @@ public class Lists extends AppCompatActivity {
         lAdapter.setOnItemClickListener(new Lists_Adapter.OnListItemClickListener() {
             @Override
             public void OnItemClicked(int position) {
-
+                Intent intent = new Intent(Lists.this,Lists_Inner_List.class);
+                intent.putExtra("card_id",lstList.get(position).getId());
+                intent.putExtra("title",lstList.get(position).getTitle());
+                startActivity(intent);
             }
 
             @Override
-            public void OnDeleteClicked(int position) {
+            public void OnItemDeleted(int position) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(Lists.this);
-                builder.setTitle("Delete reminder")
+                builder.setTitle("Delete list")
                         .setMessage("Are you sure you want to delete this list?")
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
@@ -85,6 +89,16 @@ public class Lists extends AppCompatActivity {
                             }
                         });
                 builder.create().show();
+            }
+
+            @Override
+            public void OnItemShared(int position) {
+                Toast.makeText(Lists.this, "Share clicked!", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void OnTitleClicked(int position) {
+
             }
         });
 

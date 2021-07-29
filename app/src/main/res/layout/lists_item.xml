@@ -1,6 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="125dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginEnd="5dp"
+    android:layout_marginStart="5dp"
+    android:layout_marginTop="10dp"
+    app:cardCornerRadius="15dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="2dp">
+
+        <TextView
+            android:id="@+id/card_sub_index"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginRight="5dp"
+            android:textSize="25dp"
+            android:text="i)"
+            android:fontFamily="@font/amaranth"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:id="@+id/Title_sub_card"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxWidth="290dp"
+            android:layout_toRightOf="@id/card_sub_index"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="15dp"
+            android:textSize="25dp"
+            android:textColor="@color/black"
+            android:text="Title"
+            android:fontFamily="@font/amaranth"
+            android:maxLines="3"
+            android:ellipsize="end"/>
+
+        <ImageButton
+            android:id="@+id/card_sub_delete"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="10dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/ic_outline_delete_40"/>
+
+        <ImageButton
+            android:id="@+id/card_sub_share"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/ic_outline_share_40"/>
+
+    </RelativeLayout>
 
 </androidx.cardview.widget.CardView>

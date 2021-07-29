@@ -26,7 +26,9 @@ public class Lists_Adapter extends RecyclerView.Adapter<Lists_Adapter.List_View_
     public interface OnListItemClickListener
     {
         void OnItemClicked(int position);
-        void OnDeleteClicked(int position);
+        void OnItemDeleted(int position);
+        void OnItemShared(int position);
+        void OnTitleClicked(int position);
     }
 
     public static class List_View_Holder extends RecyclerView.ViewHolder
@@ -34,13 +36,15 @@ public class Lists_Adapter extends RecyclerView.Adapter<Lists_Adapter.List_View_
         private TextView title;
         private TextView index;
         private ImageButton delete;
+        private ImageButton share;
 
         public List_View_Holder(@NonNull View itemView) {
             super(itemView);
 
-            title = itemView.findViewById(R.id.Title_card);
-            index = itemView.findViewById(R.id.card_index);
-            delete = itemView.findViewById(R.id.card_delete);
+            title = itemView.findViewById(R.id.Title_sub_card);
+            index = itemView.findViewById(R.id.card_sub_index);
+            delete = itemView.findViewById(R.id.card_sub_delete);
+            share = itemView.findViewById(R.id.card_sub_share);
 
         }
     }
@@ -54,7 +58,7 @@ public class Lists_Adapter extends RecyclerView.Adapter<Lists_Adapter.List_View_
     @NonNull
     @Override
     public List_View_Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.reminders_and_lists_item,parent,false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.lists_item,parent,false);
         Lists_Adapter.List_View_Holder lvh = new Lists_Adapter.List_View_Holder(v);
         return lvh;
     }
@@ -85,7 +89,20 @@ public class Lists_Adapter extends RecyclerView.Adapter<Lists_Adapter.List_View_
                     int position = holder.getAdapterPosition();
                     if(position!=RecyclerView.NO_POSITION)
                     {
-                        lListener.OnDeleteClicked(position);
+                        lListener.OnItemDeleted(position);
+                    }
+                }
+            }
+        });
+        holder.share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(lListener!=null)
+                {
+                    int position = holder.getAdapterPosition();
+                    if(position!=RecyclerView.NO_POSITION)
+                    {
+                        lListener.OnItemShared(position);
                     }
                 }
             }
