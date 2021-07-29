@@ -6,9 +6,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
@@ -94,12 +97,38 @@ public class Lists_Inner_List extends AppCompatActivity {
 
             @Override
             public void OnItemShared(int position) {
-                Toast.makeText(Lists_Inner_List.this, "Share clicked", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(Intent.ACTION_SEND);
+                intent.setType("text/plain");
+                intent.putExtra(Intent.EXTRA_SUBJECT,ctitle+" list item");
+                intent.putExtra(Intent.EXTRA_TEXT,innerList.get(position).getTitle());
+                startActivity(Intent.createChooser(intent,"Share item with.."));
             }
 
             @Override
             public void OnTitleClicked(int position) {
+                View view = LayoutInflater.from(getApplicationContext()).inflate(R.layout.title_edit,null);
+                AlertDialog.Builder builder = new AlertDialog.Builder(Lists_Inner_List.this);
+                builder.setTitle("Edit title")
+                        .setView(view)
+                        .setPositiveButton("Apply", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                EditText titleContainer = view.findViewById(R.id.title_edit_et);
+                                if(!(titleContainer.getText().toString().trim().equals("")||titleContainer.getText().toString().trim()==null))
+                                {
+                                    innerList.get(position).setTitle(titleContainer.getText().toString().trim());
+                                    saveData();
+                                    buildRecyclerView();
+                                }
+                            }
+                        })
+                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
 
+                            }
+                        });
+                builder.create().show();
             }
         });
     }

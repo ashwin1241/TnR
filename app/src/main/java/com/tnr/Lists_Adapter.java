@@ -107,6 +107,19 @@ public class Lists_Adapter extends RecyclerView.Adapter<Lists_Adapter.List_View_
                 }
             }
         });
+        holder.title.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(lListener!=null)
+                {
+                    int position = holder.getAdapterPosition();
+                    if(position!=RecyclerView.NO_POSITION)
+                    {
+                        lListener.OnTitleClicked(position);
+                    }
+                }
+            }
+        });
     }
 
     @Override
