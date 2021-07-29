@@ -80,7 +80,7 @@ public class Reminders extends AppCompatActivity {
         rRecyclerView.setLayoutManager(rLayoutManager);
         rRecyclerView.setAdapter(rAdapter);
 
-        rAdapter.setOnItemClickListener(new Reminders_Adapter.OnItemClickListener() {
+        rAdapter.setOnItemClickListener(new Reminders_Adapter.OnReminderItemClickListener() {
             @Override
             public void OnItemClicked(int position) {
                 Intent intent = new Intent(Reminders.this, Reminders_Preview.class);
@@ -90,7 +90,26 @@ public class Reminders extends AppCompatActivity {
 
             @Override
             public void OnDeleteClicked(int position) {
-                delete_reminder_card(position);
+                AlertDialog.Builder builder = new AlertDialog.Builder(Reminders.this);
+                builder.setTitle("Delete reminder")
+                        .setMessage("Are you sure you want to delete this reminder?")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                remlList.remove(position);
+                                rAdapter.notifyItemRemoved(position);
+                                saveData();
+                                Toast.makeText(Reminders.this, "Reminder deleted", Toast.LENGTH_SHORT).show();
+                                buildRecyclerView();
+                            }
+                        })
+                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        });
+                builder.create().show();
             }
         });
 
@@ -127,25 +146,7 @@ public class Reminders extends AppCompatActivity {
 
     private void delete_reminder_card(int position)
     {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Delete reminder")
-        .setMessage("Are you sure you want to delete this reminder?")
-        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                remlList.remove(position);
-                rAdapter.notifyItemRemoved(position);
-                saveData();
-                Toast.makeText(Reminders.this, "Reminder deleted", Toast.LENGTH_SHORT).show();
-            }
-        })
-        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
 
-            }
-        });
-        builder.create().show();
     }
 
 }

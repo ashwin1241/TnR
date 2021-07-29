@@ -16,14 +16,14 @@ public class Tasks_Adapter extends RecyclerView.Adapter<Tasks_Adapter.Task_View_
 
     private ArrayList<Tasks_Card_Data> tskList;
     private Context tContext;
-    private OnItemClickListener tListener;
+    private OnTaskItemClickListener tListener;
 
-    public void setOnItemClickListener(OnItemClickListener listener)
+    public void setOnItemClickListener(OnTaskItemClickListener listener)
     {
         this.tListener = listener;
     }
 
-    public interface OnItemClickListener
+    public interface OnTaskItemClickListener
     {
         void OnItemClicked(int position);
         void OnItemDeleted(int position);
@@ -38,7 +38,7 @@ public class Tasks_Adapter extends RecyclerView.Adapter<Tasks_Adapter.Task_View_
         private ImageView tskdelete;
         private ImageView tskshare;
 
-        public Task_View_Holder(@NonNull View itemView, OnItemClickListener listener) {
+        public Task_View_Holder(@NonNull View itemView, OnTaskItemClickListener listener) {
             super(itemView);
 
             tsktitle = itemView.findViewById(R.id.tsk_title);
@@ -46,46 +46,6 @@ public class Tasks_Adapter extends RecyclerView.Adapter<Tasks_Adapter.Task_View_
             tskdateandtime = itemView.findViewById(R.id.tsk_date_and_time);
             tskdelete = itemView.findViewById(R.id.tsk_card_delete);
             tskshare = itemView.findViewById(R.id.tsk_card_share);
-
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if(listener!=null)
-                    {
-                        int position = getAdapterPosition();
-                        if(position!=RecyclerView.NO_POSITION)
-                        {
-                            listener.OnItemClicked(position);
-                        }
-                    }
-                }
-            });
-            tskshare.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if(listener!=null)
-                    {
-                        int position = getAdapterPosition();
-                        if(position!=RecyclerView.NO_POSITION)
-                        {
-                            listener.OnItemShared(position);
-                        }
-                    }
-                }
-            });
-            tskdelete.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if(listener!=null)
-                    {
-                        int position = getAdapterPosition();
-                        if(position!=RecyclerView.NO_POSITION)
-                        {
-                            listener.OnItemDeleted(position);
-                        }
-                    }
-                }
-            });
 
         }
     }
@@ -111,6 +71,46 @@ public class Tasks_Adapter extends RecyclerView.Adapter<Tasks_Adapter.Task_View_
         holder.tsktitle.setText(currentItem.getTitle());
         holder.tskdescription.setText(currentItem.getDescription());
         holder.tskdateandtime.setText(currentItem.getDate()+" ; "+currentItem.getTime());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(tListener!=null)
+                {
+                    int position = holder.getAdapterPosition();
+                    if(position!=RecyclerView.NO_POSITION)
+                    {
+                        tListener.OnItemClicked(position);
+                    }
+                }
+            }
+        });
+        holder.tskshare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(tListener!=null)
+                {
+                    int position = holder.getAdapterPosition();
+                    if(position!=RecyclerView.NO_POSITION)
+                    {
+                        tListener.OnItemShared(position);
+                    }
+                }
+            }
+        });
+        holder.tskdelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(tListener!=null)
+                {
+                    int position = holder.getAdapterPosition();
+                    if(position!=RecyclerView.NO_POSITION)
+                    {
+                        tListener.OnItemDeleted(position);
+                    }
+                }
+            }
+        });
 
     }
 

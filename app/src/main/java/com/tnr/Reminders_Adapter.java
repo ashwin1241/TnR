@@ -15,15 +15,15 @@ import java.util.ArrayList;
 public class Reminders_Adapter extends RecyclerView.Adapter<Reminders_Adapter.Reminder_View_Holder> {
 
     private ArrayList<Reminders_Card_Data> arrayList;
-    private OnItemClickListener rListener;
+    private OnReminderItemClickListener rListener;
     private Context rContext;
 
-    public void setOnItemClickListener(OnItemClickListener listener)
+    public void setOnItemClickListener(OnReminderItemClickListener listener)
     {
         this.rListener = listener;
     }
 
-    public interface OnItemClickListener
+    public interface OnReminderItemClickListener
     {
         void OnItemClicked(int position);
         void OnDeleteClicked(int position);
@@ -54,15 +54,16 @@ public class Reminders_Adapter extends RecyclerView.Adapter<Reminders_Adapter.Re
     @NonNull
     @Override
     public Reminder_View_Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.reminders_item,parent,false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.reminders_and_lists_item,parent,false);
         Reminder_View_Holder rvh = new Reminder_View_Holder(v);
         return rvh;
     }
 
     @Override
     public void onBindViewHolder(@NonNull Reminders_Adapter.Reminder_View_Holder holder, int position) {
-        Reminders_Card_Data currentCard = arrayList.get(position);
-        holder.title.setText(currentCard.getTitle());
+        Reminders_Card_Data currentItem = arrayList.get(position);
+
+        holder.title.setText(currentItem.getTitle());
         holder.index.setText(String.valueOf(position+1)+")");
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

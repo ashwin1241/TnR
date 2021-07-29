@@ -18,8 +18,6 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
 
 public class Tasks extends AppCompatActivity {
 
@@ -61,7 +59,7 @@ public class Tasks extends AppCompatActivity {
         tRecyclerView.setLayoutManager(tLayoutManager);
         tRecyclerView.setAdapter(tAdapter);
 
-        tAdapter.setOnItemClickListener(new Tasks_Adapter.OnItemClickListener() {
+        tAdapter.setOnItemClickListener(new Tasks_Adapter.OnTaskItemClickListener() {
             @Override
             public void OnItemClicked(int position) {
                 Intent intent = new Intent(Tasks.this,Tasks_Preview.class);
