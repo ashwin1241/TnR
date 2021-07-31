@@ -51,26 +51,6 @@ public class Reminders extends AppCompatActivity {
 
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.search_menu, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-
-        switch (item.getItemId())
-        {
-            case R.id.search:
-            break;
-            case android.R.id.home: startActivity(new Intent(Reminders.this,Dashboard.class));
-            break;
-        }
-        return true;
-    }
-
     private void buildRecyclerView()
     {
         rRecyclerView = findViewById(R.id.reminder_rec_view);

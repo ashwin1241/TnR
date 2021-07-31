@@ -107,13 +107,14 @@ public class Lists_Inner_List extends AppCompatActivity {
             @Override
             public void OnTitleClicked(int position) {
                 View view = LayoutInflater.from(getApplicationContext()).inflate(R.layout.title_edit,null);
+                EditText titleContainer = view.findViewById(R.id.title_edit_et);
+                titleContainer.setText(innerList.get(position).getTitle());
                 AlertDialog.Builder builder = new AlertDialog.Builder(Lists_Inner_List.this);
                 builder.setTitle("Edit title")
                         .setView(view)
                         .setPositiveButton("Apply", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                EditText titleContainer = view.findViewById(R.id.title_edit_et);
                                 if(!(titleContainer.getText().toString().trim().equals("")||titleContainer.getText().toString().trim()==null))
                                 {
                                     innerList.get(position).setTitle(titleContainer.getText().toString().trim());

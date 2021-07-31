@@ -7,10 +7,11 @@
         android:id="@+id/title_edit_et"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="10dp"
         android:textSize="17dp"
         android:drawableStart="@drawable/ic_outline_edit_24"
         android:drawablePadding="15dp"
-        android:hint="New title"
+        android:hint="Enter title"
         android:padding="10dp"/>
 
 </RelativeLayout>
