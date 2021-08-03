@@ -22,13 +22,13 @@
         android:id="@+id/selected_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/rem_date"
-        android:text="DD/MM/YYYY"
-        android:layout_marginTop="33dp"
-        android:fontFamily="@font/amaranth"
         android:layout_marginStart="30dp"
-        android:textSize="17dp"
-        android:textColor="@color/black"/>
+        android:layout_marginTop="33dp"
+        android:layout_toRightOf="@id/rem_date"
+        android:fontFamily="@font/amaranth"
+        android:text="DD/MM/YYYY"
+        android:textColor="@color/black"
+        android:textSize="17dp" />
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/date_chooser"
@@ -56,14 +56,14 @@
         android:id="@+id/selected_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/rem_time"
         android:layout_below="@id/date_chooser"
-        android:text="HH:MM"
-        android:layout_marginTop="33dp"
-        android:fontFamily="@font/amaranth"
         android:layout_marginStart="30dp"
-        android:textSize="17dp"
-        android:textColor="@color/black"/>
+        android:layout_marginTop="33dp"
+        android:layout_toRightOf="@id/rem_time"
+        android:fontFamily="@font/amaranth"
+        android:text="HH:MM"
+        android:textColor="@color/black"
+        android:textSize="17dp" />
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/time_chooser"
@@ -112,8 +112,8 @@
         android:layout_marginTop="30dp"
         android:fontFamily="@font/amaranth"
         android:text="Description:"
-        android:textSize="20dp"
-        android:textColor="@color/black"/>
+        android:textColor="@color/black"
+        android:textSize="20dp" />
 
     <EditText
         android:id="@+id/rem_desc"
@@ -129,6 +129,41 @@
         android:layout_marginEnd="20dp"
         android:maxLines="7"
         android:ellipsize="end"/>
+
+    <TextView
+        android:id="@+id/rem_freq_column"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rem_desc"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/amaranth"
+        android:text="Frequency:"
+        android:textColor="@color/black"
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/rem_freq"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rem_desc"
+        android:layout_marginStart="43dp"
+        android:layout_marginTop="33dp"
+        android:layout_toRightOf="@id/rem_freq_column"
+        android:fontFamily="@font/amaranth"
+        android:textSize="17dp"
+        android:textColor="@color/black"
+        android:text="Never"/>
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/rem_freq_chooser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rem_freq"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="Pick frequency"
+        android:textAlignment="center" />
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/save_changes"

@@ -53,15 +53,15 @@
 
     <TextView
         android:id="@+id/abcd1234"
-        android:layout_below="@id/edit_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/edit_date"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="60dp"
         android:layout_toRightOf="@id/notif_bell"
-        android:layout_marginStart="20dp"
+        android:fontFamily="@font/amaranth"
         android:text="Notify before: "
-        android:textSize="17dp"
-        android:fontFamily="@font/amaranth"/>
+        android:textSize="17dp" />
 
     <EditText
         android:id="@+id/time_offset_for_rem"
@@ -87,11 +87,43 @@
         android:textSize="17dp"
         android:fontFamily="@font/amaranth"/>
 
+    <ImageView
+        android:id="@+id/refresh_icon1"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_below="@id/notif_bell"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="10dp"
+        android:src="@drawable/ic_outline_refresh_40"/>
+
+    <TextView
+        android:id="@+id/efgh67890edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/refresh_icon1"
+        android:layout_marginStart="20dp"
+        android:fontFamily="@font/amaranth"
+        android:text="Frequency:"
+        android:layout_below="@id/abcd1234"
+        android:layout_marginTop="50dp"
+        android:textSize="17dp"/>
+
+    <TextView
+        android:id="@+id/reminder_frequency_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/efgh67890edit"
+        android:layout_marginStart="10dp"
+        android:layout_below="@id/abcd1234"
+        android:layout_marginTop="50dp"
+        android:fontFamily="@font/amaranth"
+        android:textSize="17dp"/>
+
     <EditText
         android:id="@+id/edit_desc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/notif_bell"
+        android:layout_below="@id/refresh_icon1"
         android:layout_marginTop="50dp"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"

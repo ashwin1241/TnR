@@ -27,6 +27,7 @@ public class Reminders_Preview extends AppCompatActivity {
     private TextView prev_time;
     private TextView time_offset;
     private TextView prev_desc;
+    private TextView rem_freq;
     private String rem_date;
 
     private String extract_day ()
@@ -117,6 +118,7 @@ public class Reminders_Preview extends AppCompatActivity {
         prev_time = findViewById(R.id.prev_time);
         time_offset = findViewById(R.id.time_offset_for_rem_prev);
         prev_desc = findViewById(R.id.prev_desc);
+        rem_freq = findViewById(R.id.reminder_frequency_prev);
 
         String tempdate="";
         switch (month)
@@ -152,6 +154,7 @@ public class Reminders_Preview extends AppCompatActivity {
         prev_title.setText(remlList.get(position).getTitle());
         prev_desc.setText(remlList.get(position).getDescription());
         time_offset.setText(remlList.get(position).getTime_offset());
+        rem_freq.setText(remlList.get(position).getFrequency());
 
     }
 

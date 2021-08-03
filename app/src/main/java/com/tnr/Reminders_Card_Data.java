@@ -8,8 +8,9 @@ public class Reminders_Card_Data {
     private String date;
     private String time;
     private String time_offset;
+    private String frequency;
 
-    public Reminders_Card_Data(long id1, String title1, String description1, String date1, String time1, String time_offset1)
+    public Reminders_Card_Data(long id1, String title1, String description1, String date1, String time1, String time_offset1, String frequency1)
     {
         this.id = id1;
         this.title = title1;
@@ -17,6 +18,7 @@ public class Reminders_Card_Data {
         this.date = date1;
         this.time = time1;
         this.time_offset = time_offset1;
+        this.frequency = frequency1;
     }
 
     public String getTitle() {
@@ -65,5 +67,13 @@ public class Reminders_Card_Data {
 
     public void setTime_offset(String time_offset) {
         this.time_offset = time_offset;
+    }
+
+    public String getFrequency() {
+        return frequency;
+    }
+
+    public void setFrequency(String frequency) {
+        this.frequency = frequency;
     }
 }

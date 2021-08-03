@@ -35,6 +35,7 @@ public class Reminders_Edit extends AppCompatActivity {
     private EditText edit_title;
     private TextView edit_date;
     private TextView edit_time;
+    private TextView rem_freq;
     private EditText time_offset;
     private EditText edit_desc;
     private String rem_date;
@@ -148,6 +149,7 @@ public class Reminders_Edit extends AppCompatActivity {
         edit_time = findViewById(R.id.edit_time);
         time_offset = findViewById(R.id.time_offset_for_rem);
         edit_desc = findViewById(R.id.edit_desc);
+        rem_freq = findViewById(R.id.reminder_frequency_edit);
 
         edit_title.setText(remlList.get(position).getTitle());
         String tempdate="";
@@ -183,6 +185,7 @@ public class Reminders_Edit extends AppCompatActivity {
         edit_time.setText(remlList.get(position).getTime());
         time_offset.setText(remlList.get(position).getTime_offset());
         edit_desc.setText(remlList.get(position).getDescription());
+        rem_freq.setText(remlList.get(position).getFrequency());
 
         edit_time.setOnClickListener(new View.OnClickListener() {
             @Override

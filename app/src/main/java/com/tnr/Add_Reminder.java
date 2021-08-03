@@ -31,10 +31,12 @@ public class Add_Reminder extends AppCompatActivity {
     private List<Reminders_Card_Data> remlList;
     private TextView date;
     private TextView time;
+    private TextView rem_frequency;
     private ExtendedFloatingActionButton date_choose;
     private ExtendedFloatingActionButton time_choose;
     private ExtendedFloatingActionButton save_changes;
     private ExtendedFloatingActionButton discard_changes;
+    private ExtendedFloatingActionButton rem_frequency_chooser;
     private EditText description;
     private EditText title;
     private String rem_time = null;
@@ -56,6 +58,8 @@ public class Add_Reminder extends AppCompatActivity {
         discard_changes = findViewById(R.id.discard_changes);
         description = findViewById(R.id.rem_desc);
         title = findViewById(R.id.rem_title);
+        rem_frequency = findViewById(R.id.rem_freq);
+        rem_frequency_chooser = findViewById(R.id.rem_freq_chooser);
 
         Calendar calendar = Calendar.getInstance();
         final int year = calendar.get(Calendar.YEAR);
@@ -151,7 +155,7 @@ public class Add_Reminder extends AppCompatActivity {
             public void onClick(View v) {
                 if(!(rem_date==null||rem_time==null))
                 {
-                    remlList.add(remlList.size(),new Reminders_Card_Data(System.currentTimeMillis(),title.getText().toString().trim(),description.getText().toString().trim(),rem_date,rem_time,"0"));
+                    remlList.add(remlList.size(),new Reminders_Card_Data(System.currentTimeMillis(),title.getText().toString().trim(),description.getText().toString().trim(),rem_date,rem_time,"0",rem_frequency.getText().toString().trim()));
                     saveData();
                     Toast.makeText(Add_Reminder.this, "Reminder saved", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(Add_Reminder.this, Reminders.class);
@@ -162,6 +166,36 @@ public class Add_Reminder extends AppCompatActivity {
                 {
                     Toast.makeText(Add_Reminder.this, "Date and Time need to be set", Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+
+        rem_frequency_chooser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String[] options = {"Never","Daily","Weekly","Monthly","Yearly","Custom"};
+                AlertDialog.Builder builder = new AlertDialog.Builder(Add_Reminder.this);
+                builder.setTitle("Choose a frequency:")
+                .setItems(options, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch(which)
+                        {
+                            case 0: rem_frequency.setText("Never");
+                                break;
+                            case 1: rem_frequency.setText("Daily");
+                                break;
+                            case 2: rem_frequency.setText("Weekly");
+                                break;
+                            case 3: rem_frequency.setText("Monthly");
+                                break;
+                            case 4: rem_frequency.setText("Yearly");
+                                break;
+                            case 5:
+                                break;
+                        }
+                    }
+                });
+                builder.create().show();
             }
         });
 
