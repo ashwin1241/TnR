@@ -11,29 +11,28 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TnR">
         <activity
-            android:name=".Lists_Edit"
+            android:name=".Custom_Frequency_Setter"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".Lists"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Lists_Inner_List"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".Lists"/>
+            android:parentActivityName=".Lists"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Add_Task"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Tasks_Preview"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".Tasks"/>
+            android:parentActivityName=".Tasks"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Tasks_Edit"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".Tasks_Preview"/>
+            android:parentActivityName=".Tasks_Preview"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Reminders_Preview"
             android:configChanges="orientation"

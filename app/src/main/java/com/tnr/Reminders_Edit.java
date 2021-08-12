@@ -1,10 +1,12 @@
 package com.tnr;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -246,6 +248,37 @@ public class Reminders_Edit extends AppCompatActivity {
             }
         });
 
+        rem_freq.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String[] options = {"Never","Daily","Weekly","Monthly","Yearly","Custom"};
+                AlertDialog.Builder builder = new AlertDialog.Builder(Reminders_Edit.this);
+                builder.setTitle("Choose a frequency:")
+                        .setItems(options, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                switch(which)
+                                {
+                                    case 0: rem_freq.setText("Never");
+                                        break;
+                                    case 1: rem_freq.setText("Daily");
+                                        break;
+                                    case 2: rem_freq.setText("Weekly");
+                                        break;
+                                    case 3: rem_freq.setText("Monthly");
+                                        break;
+                                    case 4: rem_freq.setText("Yearly");
+                                        break;
+                                    case 5: Intent intent = new Intent(Reminders_Edit.this,Custom_Frequency_Setter.class);
+                                            startActivity(intent);
+                                        break;
+                                }
+                            }
+                        });
+                builder.create().show();
+            }
+        });
+
     }
 
     @Override
@@ -300,6 +333,7 @@ public class Reminders_Edit extends AppCompatActivity {
         remlList.get(position).setTime(edit_time.getText().toString().trim());
         remlList.get(position).setDate(rem_date);
         remlList.get(position).setTime_offset(time_offset.getText().toString().trim());
+        remlList.get(position).setFrequency(rem_freq.getText().toString().trim());
         saveData();
         Toast.makeText(this, "Edits saved", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(Reminders_Edit.this, Reminders_Preview.class);

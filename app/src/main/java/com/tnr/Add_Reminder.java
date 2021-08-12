@@ -190,7 +190,8 @@ public class Add_Reminder extends AppCompatActivity {
                                 break;
                             case 4: rem_frequency.setText("Yearly");
                                 break;
-                            case 5:
+                            case 5: Intent intent = new Intent(Add_Reminder.this,Custom_Frequency_Setter.class);
+                                    startActivity(intent);
                                 break;
                         }
                     }
