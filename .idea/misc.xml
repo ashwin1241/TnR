@@ -3,9 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Android_Projects/TnR/app/src/main/res/drawable/cbs1.xml" value="0.22631578947368422" />
+        <entry key="..\:/Android_Projects/TnR/app/src/main/res/drawable/cbs2.xml" value="0.22631578947368422" />
         <entry key="..\:/Android_Projects/TnR/app/src/main/res/drawable/custom_button_shape.xml" value="0.22631578947368422" />
+        <entry key="..\:/Android_Projects/TnR/app/src/main/res/drawable/custom_button_shape_selected.xml" value="0.22631578947368422" />
         <entry key="..\:/Android_Projects/TnR/app/src/main/res/layout/activity_add_reminder.xml" value="0.264" />
-        <entry key="..\:/Android_Projects/TnR/app/src/main/res/layout/activity_custom_frequency_setter.xml" value="0.264" />
+        <entry key="..\:/Android_Projects/TnR/app/src/main/res/layout/activity_custom_frequency_setter.xml" value="0.4" />
         <entry key="..\:/Android_Projects/TnR/app/src/main/res/layout/activity_dashboard.xml" value="0.21271929824561403" />
         <entry key="..\:/Android_Projects/TnR/app/src/main/res/layout/activity_lists.xml" value="0.21271929824561403" />
         <entry key="..\:/Android_Projects/TnR/app/src/main/res/layout/activity_lists_edit.xml" value="0.21271929824561403" />

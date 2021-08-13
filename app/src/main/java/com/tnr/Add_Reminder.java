@@ -83,6 +83,7 @@ public class Add_Reminder extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         Intent intent = new Intent(Add_Reminder.this, Reminders.class);
                         startActivity(intent);
+                        finish();
                     }
                 })
                 ;
