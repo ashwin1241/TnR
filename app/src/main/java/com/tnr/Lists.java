@@ -72,8 +72,32 @@ public class Lists extends AppCompatActivity {
                 break;
             case android.R.id.home: startActivity(new Intent(Lists.this,Dashboard.class));
                 break;
+            case R.id.delete_all_lists: deleteall();
+                break;
         }
         return true;
+    }
+
+    private void deleteall()
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(Lists.this);
+        builder.setTitle("Delete")
+        .setMessage("Delete (this/all) list(s)?")
+        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                lstList = new ArrayList<>();
+                saveData();
+                buildRecyclerView();
+            }
+        })
+        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        builder.create().show();
     }
 
     private void buildRecyclerView()
