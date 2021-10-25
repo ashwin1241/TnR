@@ -90,12 +90,13 @@ public class Tasks extends AppCompatActivity {
                             @Override
                             protected void onPostExecute(Void unused) {
                                 super.onPostExecute(unused);
-                                tAdapter.notifyItemRemoved(position);
+                                buildRecyclerView();
                                 Toast.makeText(Tasks.this, "Task deleted", Toast.LENGTH_SHORT).show();
                             }
                             @Override
                             protected Void doInBackground(Void... voids) {
                                 dao.delete(tskList.get(position));
+                                tskList = dao.getAll();
                                 return null;
                             }
                         }
