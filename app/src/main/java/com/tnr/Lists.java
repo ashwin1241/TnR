@@ -5,10 +5,12 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Room;
 
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -28,11 +30,13 @@ import java.util.List;
 
 public class Lists extends AppCompatActivity {
 
-    private ArrayList<Lists_Card_Data> lstList;
+    private List<Lists_Card_Data> lstList;
     private RecyclerView lRecyclerView;
     private Lists_Adapter lAdapter;
     private RecyclerView.LayoutManager lLayoutManager;
     private ImageButton add_lst;
+    private App_Databse databse;
+    private List_Dao dao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,16 +45,45 @@ public class Lists extends AppCompatActivity {
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setTitle("Lists");
 
-        loadData();
-        buildRecyclerView();
+        class loadData extends AsyncTask<Void,Void,Void>
+        {
+            @Override
+            protected void onPostExecute(Void unused) {
+                super.onPostExecute(unused);
+                buildRecyclerView();
+            }
+
+            @Override
+            protected Void doInBackground(Void... voids) {
+                databse = Room.databaseBuilder(Lists.this,App_Databse.class,"App_Database").build();
+                dao = databse.list_dao();
+                lstList = dao.getAll();
+                return null;
+            }
+        }
+        new loadData().execute();
 
         add_lst = findViewById(R.id.add_list);
         add_lst.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                lstList.add(lstList.size(),new Lists_Card_Data(System.currentTimeMillis(),"New List"));
-                lAdapter.notifyItemInserted(lstList.size());
-                saveData();
+                class AddList extends AsyncTask<Void,Void,Void>
+                {
+                    @Override
+                    protected void onPostExecute(Void unused) {
+                        super.onPostExecute(unused);
+                        buildRecyclerView();
+                    }
+
+                    @Override
+                    protected Void doInBackground(Void... voids) {
+                        dao.insert(new Lists_Card_Data(System.currentTimeMillis(),"New List"));
+                        lstList = dao.getAll();
+                        return null;
+                    }
+                }
+                new AddList().execute();
+
             }
         });
 
@@ -86,9 +119,23 @@ public class Lists extends AppCompatActivity {
         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                lstList = new ArrayList<>();
-                saveData();
-                buildRecyclerView();
+                class DeleteAll extends AsyncTask<Void,Void,Void>
+                {
+                    @Override
+                    protected void onPostExecute(Void unused) {
+                        super.onPostExecute(unused);
+                        buildRecyclerView();
+                        Toast.makeText(Lists.this, "All list(s) cleared", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    protected Void doInBackground(Void... voids) {
+                        dao.deleteAll();
+                        lstList = dao.getAll();
+                        return null;
+                    }
+                }
+                new DeleteAll().execute();
             }
         })
         .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -113,8 +160,7 @@ public class Lists extends AppCompatActivity {
             @Override
             public void OnItemClicked(int position) {
                 Intent intent = new Intent(Lists.this,Lists_Inner_List.class);
-                intent.putExtra("card_id",lstList.get(position).getId());
-                intent.putExtra("title",lstList.get(position).getTitle());
+                intent.putExtra("card",lstList.get(position));
                 startActivity(intent);
             }
 
@@ -126,11 +172,23 @@ public class Lists extends AppCompatActivity {
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                lstList.remove(position);
-                                lAdapter.notifyItemRemoved(position);
-                                saveData();
-                                Toast.makeText(Lists.this, "List deleted", Toast.LENGTH_SHORT).show();
-                                buildRecyclerView();
+                                class DeleteList extends AsyncTask<Void,Void,Void>
+                                {
+                                    @Override
+                                    protected void onPostExecute(Void unused) {
+                                        super.onPostExecute(unused);
+                                        Toast.makeText(Lists.this, "List deleted", Toast.LENGTH_SHORT).show();
+                                        buildRecyclerView();
+                                    }
+
+                                    @Override
+                                    protected Void doInBackground(Void... voids) {
+                                        dao.delete(lstList.get(position));
+                                        lstList = dao.getAll();
+                                        return null;
+                                    }
+                                }
+                                new DeleteList().execute();
                             }
                         })
                         .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -164,9 +222,23 @@ public class Lists extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         if(!(titleContainer.getText().toString().trim().equals("")||titleContainer.getText().toString().trim()==null))
                         {
-                            lstList.get(position).setTitle(titleContainer.getText().toString().trim());
-                            saveData();
-                            buildRecyclerView();
+                            class UpdateTitle extends AsyncTask<Void,Void,Void>
+                            {
+                                @Override
+                                protected void onPostExecute(Void unused) {
+                                    super.onPostExecute(unused);
+                                    buildRecyclerView();
+                                }
+
+                                @Override
+                                protected Void doInBackground(Void... voids) {
+                                    lstList.get(position).setTitle(titleContainer.getText().toString().trim());
+                                    dao.update(lstList.get(position));
+                                    lstList = dao.getAll();
+                                    return null;
+                                }
+                            }
+                            new UpdateTitle().execute();
                         }
                     }
                 })
@@ -180,29 +252,6 @@ public class Lists extends AppCompatActivity {
             }
         });
 
-    }
-
-    private void loadData()
-    {
-        SharedPreferences sharedPreferences = getSharedPreferences("list_activity_sp",MODE_PRIVATE);
-        Gson gson = new Gson();
-        String json = sharedPreferences.getString("lst_list",null);
-        Type type = new TypeToken<ArrayList<Lists_Card_Data>>(){}.getType();
-        lstList = gson.fromJson(json,type);
-        if(lstList==null)
-        {
-            lstList = new ArrayList<Lists_Card_Data>();
-        }
-    }
-
-    private void saveData()
-    {
-        SharedPreferences sharedPreferences = getSharedPreferences("list_activity_sp",MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        Gson gson = new Gson();
-        String json = gson.toJson(lstList);
-        editor.putString("lst_list",json);
-        editor.apply();
     }
 
     private String getList(long card_id,int position)

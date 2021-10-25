@@ -14,7 +14,7 @@ public interface Task_Dao {
     List<Tasks_Card_Data> getAll();
 
     @Query("SELECT * FROM Tasks_Card_Data WHERE id LIKE :card_id")
-    Tasks_Card_Data getCard(long card_id);
+    Tasks_Card_Data getTask(long card_id);
 
     @Insert
     void insert(Tasks_Card_Data card_data);

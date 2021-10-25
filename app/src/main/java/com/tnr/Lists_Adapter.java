@@ -11,10 +11,11 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Lists_Adapter extends RecyclerView.Adapter<Lists_Adapter.List_View_Holder>{
 
-    private ArrayList<Lists_Card_Data> lstList;
+    private List<Lists_Card_Data> lstList;
     private OnListItemClickListener lListener;
     private Context lContext;
 
@@ -49,7 +50,7 @@ public class Lists_Adapter extends RecyclerView.Adapter<Lists_Adapter.List_View_
         }
     }
 
-    public Lists_Adapter(ArrayList<Lists_Card_Data> arrayList1, Context context1)
+    public Lists_Adapter(List<Lists_Card_Data> arrayList1, Context context1)
     {
         this.lstList = arrayList1;
         this.lContext = context1;

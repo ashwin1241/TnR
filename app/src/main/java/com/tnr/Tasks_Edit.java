@@ -20,7 +20,7 @@ public class Tasks_Edit extends AppCompatActivity {
 
     private EditText tsk_edit_title;
     private EditText tsk_edit_description;
-    private Tasks_Databse databse;
+    private App_Databse databse;
     private Task_Dao dao;
     private Tasks_Card_Data card;
 
@@ -34,7 +34,7 @@ public class Tasks_Edit extends AppCompatActivity {
         {
             @Override
             protected Void doInBackground(Void... voids) {
-                databse = Room.databaseBuilder(Tasks_Edit.this,Tasks_Databse.class,"Tasks").build();
+                databse = Room.databaseBuilder(Tasks_Edit.this, App_Databse.class,"App_Database").build();
                 dao = databse.task_dao();
                 return null;
             }
@@ -98,7 +98,7 @@ public class Tasks_Edit extends AppCompatActivity {
                 card.setDescription(tsk_edit_description.getText().toString().trim());
                 dao.update(card);
                 long id = card.getId();
-                card = dao.getCard(id);
+                card = dao.getTask(id);
                 return card;
             }
         }

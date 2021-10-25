@@ -1,24 +1,38 @@
 package com.tnr;
 
-public class Reminders_Card_Data {
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
+
+@Entity
+public class Reminders_Card_Data implements Serializable {
+
+    @PrimaryKey
     private long id;
+    @ColumnInfo(name = "title")
     private String title;
+    @ColumnInfo(name = "description")
     private String description;
+    @ColumnInfo(name = "date")
     private String date;
+    @ColumnInfo(name = "time")
     private String time;
+    @ColumnInfo(name = "time_offset")
     private String time_offset;
+    @ColumnInfo(name = "frequency")
     private String frequency;
 
-    public Reminders_Card_Data(long id1, String title1, String description1, String date1, String time1, String time_offset1, String frequency1)
+    public Reminders_Card_Data(long id, String title, String description, String date, String time, String time_offset, String frequency)
     {
-        this.id = id1;
-        this.title = title1;
-        this.description = description1;
-        this.date = date1;
-        this.time = time1;
-        this.time_offset = time_offset1;
-        this.frequency = frequency1;
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.date = date;
+        this.time = time;
+        this.time_offset = time_offset;
+        this.frequency = frequency;
     }
 
     public String getTitle() {

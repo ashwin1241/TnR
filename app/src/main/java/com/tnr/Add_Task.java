@@ -24,7 +24,7 @@ public class Add_Task extends AppCompatActivity {
     private String tsk_date;
     private ExtendedFloatingActionButton saveChanges1;
     private ExtendedFloatingActionButton discardChanges1;
-    private Tasks_Databse databse;
+    private App_Databse databse;
     private Task_Dao dao;
 
     @Override
@@ -36,7 +36,7 @@ public class Add_Task extends AppCompatActivity {
         {
             @Override
             protected Void doInBackground(Void... voids) {
-                databse = Room.databaseBuilder(Add_Task.this,Tasks_Databse.class,"Tasks").build();
+                databse = Room.databaseBuilder(Add_Task.this, App_Databse.class,"App_Database").build();
                 dao = databse.task_dao();
                 return null;
             }

@@ -23,7 +23,7 @@ public class Tasks extends AppCompatActivity {
     private Tasks_Adapter tAdapter;
     private RecyclerView.LayoutManager tLayoutManager;
     private ImageButton add_tsk;
-    private Tasks_Databse databse;
+    private App_Databse databse;
     private Task_Dao dao;
 
     @Override
@@ -37,7 +37,7 @@ public class Tasks extends AppCompatActivity {
         {
             @Override
             protected Void doInBackground(Void... voids) {
-                databse = Room.databaseBuilder(Tasks.this,Tasks_Databse.class,"Tasks").build();
+                databse = Room.databaseBuilder(Tasks.this, App_Databse.class,"App_Database").build();
                 dao = databse.task_dao();
                 tskList = dao.getAll();
                 return null;
