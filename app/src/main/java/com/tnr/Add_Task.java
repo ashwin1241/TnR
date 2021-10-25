@@ -1,57 +1,51 @@
 package com.tnr;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.room.Room;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
-import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 
 public class Add_Task extends AppCompatActivity {
 
-    private List<Tasks_Card_Data> tskList;
-    private long card_id;
-    private int position;
     private EditText tsk_edit_title;
     private EditText tsk_edit_description;
     private String tsk_time;
     private String tsk_date;
     private ExtendedFloatingActionButton saveChanges1;
     private ExtendedFloatingActionButton discardChanges1;
+    private Tasks_Databse databse;
+    private Task_Dao dao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_task);
 
-        loadData();
-
-        card_id = getIntent().getLongExtra("card_id",0);
-        for(int i=0;i<tskList.size();i++)
+        class loadData extends AsyncTask<Void,Void,Void>
         {
-            if(tskList.get(i).getId()==card_id)
-            {
-                position = i;
-                break;
+            @Override
+            protected Void doInBackground(Void... voids) {
+                databse = Room.databaseBuilder(Add_Task.this,Tasks_Databse.class,"Tasks").build();
+                dao = databse.task_dao();
+                return null;
+            }
+            @Override
+            protected void onPostExecute(Void unused) {
+                super.onPostExecute(unused);
             }
         }
+        new loadData().execute();
 
         getSupportActionBar().setTitle("Add a task");
 
@@ -90,29 +84,6 @@ public class Add_Task extends AppCompatActivity {
         });
     }
 
-    private void loadData()
-    {
-        SharedPreferences sharedPreferences = getSharedPreferences("task_activity_sp",MODE_PRIVATE);
-        Gson gson = new Gson();
-        String json = sharedPreferences.getString("tsk_list",null);
-        Type type = new TypeToken<ArrayList<Tasks_Card_Data>>(){}.getType();
-        tskList = gson.fromJson(json,type);
-        if(tskList==null)
-        {
-            tskList = new ArrayList<Tasks_Card_Data>();
-        }
-    }
-
-    private void saveData()
-    {
-        SharedPreferences sharedPreferences = getSharedPreferences("task_activity_sp",MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        Gson gson = new Gson();
-        String json = gson.toJson(tskList);
-        editor.putString("tsk_list",json);
-        editor.apply();
-    }
-
     private void save_tsk_edits()
     {
         tsk_time = Calendar.getInstance().get(Calendar.HOUR_OF_DAY)+":"+Calendar.getInstance().get(Calendar.MINUTE);
@@ -146,12 +117,24 @@ public class Add_Task extends AppCompatActivity {
                 break;
         }
         tsk_date+=" "+Calendar.getInstance().get(Calendar.DAY_OF_MONTH)+", "+Calendar.getInstance().get(Calendar.YEAR);
-        tskList.add(tskList.size(),new Tasks_Card_Data(System.currentTimeMillis(),tsk_edit_title.getText().toString().trim(),tsk_edit_description.getText().toString().trim(),tsk_date,tsk_time));
-        saveData();
-        Toast.makeText(Add_Task.this, "Task added", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(Add_Task.this, Tasks.class);
-        startActivity(intent);
-        finish();
+        class AddTask extends AsyncTask<Void,Void,Void>
+        {
+            @Override
+            protected void onPostExecute(Void unused) {
+                super.onPostExecute(unused);
+                Toast.makeText(Add_Task.this, "Task added", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(Add_Task.this, Tasks.class);
+                startActivity(intent);
+                finish();
+            }
+
+            @Override
+            protected Void doInBackground(Void... voids) {
+                dao.insert(new Tasks_Card_Data(System.currentTimeMillis(),tsk_edit_title.getText().toString().trim(),tsk_edit_description.getText().toString().trim(),tsk_date,tsk_time));
+                return null;
+            }
+        }
+        new AddTask().execute();
     }
 
 }

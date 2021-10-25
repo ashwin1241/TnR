@@ -1,39 +1,30 @@
 package com.tnr;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Room;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import java.lang.reflect.Type;
-import java.util.ArrayList;
+import java.util.List;
 
 public class Tasks extends AppCompatActivity {
 
-    private ArrayList<Tasks_Card_Data> tskList;
+    private List<Tasks_Card_Data> tskList;
     private RecyclerView tRecyclerView;
     private Tasks_Adapter tAdapter;
     private RecyclerView.LayoutManager tLayoutManager;
     private ImageButton add_tsk;
-    private String tsk_date;
-    private String tsk_time;
+    private Tasks_Databse databse;
+    private Task_Dao dao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,15 +33,28 @@ public class Tasks extends AppCompatActivity {
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setTitle("Tasks");
 
-        loadData();
-        buildRecyclerView();
+        class loadData extends AsyncTask<Void,Void,Void>
+        {
+            @Override
+            protected Void doInBackground(Void... voids) {
+                databse = Room.databaseBuilder(Tasks.this,Tasks_Databse.class,"Tasks").build();
+                dao = databse.task_dao();
+                tskList = dao.getAll();
+                return null;
+            }
+            @Override
+            protected void onPostExecute(Void unused) {
+                super.onPostExecute(unused);
+                buildRecyclerView();
+            }
+        }
+        new loadData().execute();
 
         add_tsk = findViewById(R.id.add_task);
         add_tsk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Tasks.this,Add_Task.class);
-                intent.putExtra("card_id",System.currentTimeMillis());
                 startActivity(intent);
             }
         });
@@ -69,7 +73,7 @@ public class Tasks extends AppCompatActivity {
             @Override
             public void OnItemClicked(int position) {
                 Intent intent = new Intent(Tasks.this,Tasks_Preview.class);
-                intent.putExtra("card_id",tskList.get(position).getId());
+                intent.putExtra("card",tskList.get(position));
                 startActivity(intent);
             }
 
@@ -81,10 +85,21 @@ public class Tasks extends AppCompatActivity {
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        tskList.remove(position);
-                        tAdapter.notifyItemRemoved(position);
-                        saveData();
-                        Toast.makeText(Tasks.this, "Task deleted", Toast.LENGTH_SHORT).show();
+                        class DeleteTask extends AsyncTask<Void,Void,Void>
+                        {
+                            @Override
+                            protected void onPostExecute(Void unused) {
+                                super.onPostExecute(unused);
+                                tAdapter.notifyItemRemoved(position);
+                                Toast.makeText(Tasks.this, "Task deleted", Toast.LENGTH_SHORT).show();
+                            }
+                            @Override
+                            protected Void doInBackground(Void... voids) {
+                                dao.delete(tskList.get(position));
+                                return null;
+                            }
+                        }
+                        new DeleteTask().execute();
                     }
                 })
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -106,29 +121,6 @@ public class Tasks extends AppCompatActivity {
             }
         });
 
-    }
-
-    private void loadData()
-    {
-        SharedPreferences sharedPreferences = getSharedPreferences("task_activity_sp",MODE_PRIVATE);
-        Gson gson = new Gson();
-        String json = sharedPreferences.getString("tsk_list",null);
-        Type type = new TypeToken<ArrayList<Tasks_Card_Data>>(){}.getType();
-        tskList = gson.fromJson(json,type);
-        if(tskList==null)
-        {
-            tskList = new ArrayList<Tasks_Card_Data>();
-        }
-    }
-
-    private void saveData()
-    {
-        SharedPreferences sharedPreferences = getSharedPreferences("task_activity_sp",MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        Gson gson = new Gson();
-        String json = gson.toJson(tskList);
-        editor.putString("tsk_list",json);
-        editor.apply();
     }
 
 }

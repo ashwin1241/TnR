@@ -9,12 +9,13 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Database;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class Tasks_Adapter extends RecyclerView.Adapter<Tasks_Adapter.Task_View_Holder>{
 
-    private ArrayList<Tasks_Card_Data> tskList;
+    private List<Tasks_Card_Data> tskList;
     private Context tContext;
     private OnTaskItemClickListener tListener;
 
@@ -50,7 +51,7 @@ public class Tasks_Adapter extends RecyclerView.Adapter<Tasks_Adapter.Task_View_
         }
     }
 
-    public Tasks_Adapter(ArrayList<Tasks_Card_Data> arrayList, Context context)
+    public Tasks_Adapter(List<Tasks_Card_Data> arrayList, Context context)
     {
         this.tskList = arrayList;
         this.tContext = context;

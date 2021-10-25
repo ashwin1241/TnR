@@ -1,20 +1,32 @@
 package com.tnr;
 
-public class Tasks_Card_Data {
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
+
+@Entity
+public class Tasks_Card_Data implements Serializable {
+
+    @PrimaryKey
     private long id;
+    @ColumnInfo(name = "title")
     private String title;
+    @ColumnInfo(name = "description")
     private String description;
+    @ColumnInfo(name = "date")
     private String date;
+    @ColumnInfo(name = "time")
     private String time;
 
-    public Tasks_Card_Data(long id1, String title1, String description1, String date1, String time1)
+    public Tasks_Card_Data(long id, String title, String description, String date, String time)
     {
-        this.id = id1;
-        this.title = title1;
-        this.description = description1;
-        this.date = date1;
-        this.time = time1;
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.date = date;
+        this.time = time;
     }
 
     public String getTitle() {

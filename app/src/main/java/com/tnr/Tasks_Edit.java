@@ -2,9 +2,11 @@ package com.tnr;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.room.Room;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -15,17 +17,18 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import java.io.Serializable;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Tasks_Edit extends AppCompatActivity {
 
-    private List<Tasks_Card_Data> tskList;
-    private long card_id;
-    private int position;
     private EditText tsk_edit_title;
     private EditText tsk_edit_description;
+    private Tasks_Databse databse;
+    private Task_Dao dao;
+    private Tasks_Card_Data card;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,25 +36,30 @@ public class Tasks_Edit extends AppCompatActivity {
         setContentView(R.layout.activity_tasks_edit);
         getSupportActionBar().setHomeButtonEnabled(true);
 
-        loadData();
-
-        card_id = getIntent().getLongExtra("card_id",0);
-        for(int i=0;i<tskList.size();i++)
+        class loadData extends AsyncTask<Void,Void,Void>
         {
-            if(tskList.get(i).getId()==card_id)
-            {
-                position = i;
-                break;
+            @Override
+            protected Void doInBackground(Void... voids) {
+                databse = Room.databaseBuilder(Tasks_Edit.this,Tasks_Databse.class,"Tasks").build();
+                dao = databse.task_dao();
+                return null;
+            }
+            @Override
+            protected void onPostExecute(Void unused) {
+                super.onPostExecute(unused);
             }
         }
+        new loadData().execute();
 
-        getSupportActionBar().setTitle(tskList.get(position).getTitle());
+        card = (Tasks_Card_Data) getIntent().getSerializableExtra("card");
+
+        getSupportActionBar().setTitle(card.getTitle());
 
         tsk_edit_title = findViewById(R.id.task_edit_title);
         tsk_edit_description = findViewById(R.id.task_edit_description);
 
-        tsk_edit_title.setText(tskList.get(position).getTitle());
-        tsk_edit_description.setText(tskList.get(position).getDescription());
+        tsk_edit_title.setText(card.getTitle());
+        tsk_edit_description.setText(card.getDescription());
 
     }
 
@@ -70,46 +78,37 @@ public class Tasks_Edit extends AppCompatActivity {
             case R.id.save_edited_rem: save_tsk_edits();
                 break;
             case android.R.id.home: Intent intent = new Intent(Tasks_Edit.this, Tasks_Preview.class);
-                                    intent.putExtra("card_id",tskList.get(position).getId());
+                                    intent.putExtra("card",card);
                                     startActivity(intent);
                 break;
         }
         return true;
     }
 
-    private void loadData()
-    {
-        SharedPreferences sharedPreferences = getSharedPreferences("task_activity_sp",MODE_PRIVATE);
-        Gson gson = new Gson();
-        String json = sharedPreferences.getString("tsk_list",null);
-        Type type = new TypeToken<ArrayList<Tasks_Card_Data>>(){}.getType();
-        tskList = gson.fromJson(json,type);
-        if(tskList==null)
-        {
-            tskList = new ArrayList<Tasks_Card_Data>();
-        }
-    }
-
-    private void saveData()
-    {
-        SharedPreferences sharedPreferences = getSharedPreferences("task_activity_sp",MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        Gson gson = new Gson();
-        String json = gson.toJson(tskList);
-        editor.putString("tsk_list",json);
-        editor.apply();
-    }
-
     private void save_tsk_edits()
     {
-        tskList.get(position).setTitle(tsk_edit_title.getText().toString().trim());
-        tskList.get(position).setDescription(tsk_edit_description.getText().toString().trim());
-        saveData();
-        Toast.makeText(this, "Edits saved", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(Tasks_Edit.this, Tasks_Preview.class);
-        intent.putExtra("card_id",tskList.get(position).getId());
-        startActivity(intent);
-        finish();
+        class UpdateData extends AsyncTask<Void,Void,Tasks_Card_Data>
+        {
+            @Override
+            protected void onPostExecute(Tasks_Card_Data card) {
+                super.onPostExecute(card);
+                Toast.makeText(Tasks_Edit.this, "Edits saved", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(Tasks_Edit.this, Tasks_Preview.class);
+                intent.putExtra("card",(Serializable) card);
+                startActivity(intent);
+                finish();
+            }
+            @Override
+            protected Tasks_Card_Data doInBackground(Void... voids) {
+                card.setTitle(tsk_edit_title.getText().toString().trim());
+                card.setDescription(tsk_edit_description.getText().toString().trim());
+                dao.update(card);
+                long id = card.getId();
+                card = dao.getCard(id);
+                return card;
+            }
+        }
+        new UpdateData().execute();
     }
 
 }
