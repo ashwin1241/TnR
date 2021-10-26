@@ -131,6 +131,7 @@ public class Lists extends AppCompatActivity {
                     @Override
                     protected Void doInBackground(Void... voids) {
                         dao.deleteAll();
+                        dao.deleteAllInner();
                         lstList = dao.getAll();
                         return null;
                     }
@@ -183,6 +184,7 @@ public class Lists extends AppCompatActivity {
 
                                     @Override
                                     protected Void doInBackground(Void... voids) {
+                                        dao.deleteInnerSpecific(lstList.get(position).getId());
                                         dao.delete(lstList.get(position));
                                         lstList = dao.getAll();
                                         return null;

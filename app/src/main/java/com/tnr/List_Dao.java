@@ -20,6 +20,12 @@ public interface List_Dao {
     @Query("DELETE FROM Lists_Card_Data")
     void deleteAll();
 
+    @Query("DELETE FROM Inner_List_Card_Data")
+    void deleteAllInner();
+
+    @Query("DELETE FROM Inner_List_Card_Data WHERE parent_id LIKE :parent_id")
+    void deleteInnerSpecific(long parent_id);
+
     @Insert
     void insert(Lists_Card_Data card_data);
 
