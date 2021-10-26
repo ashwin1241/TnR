@@ -159,7 +159,7 @@ public class Lists extends AppCompatActivity {
         lAdapter.setOnItemClickListener(new Lists_Adapter.OnListItemClickListener() {
             @Override
             public void OnItemClicked(int position) {
-                Intent intent = new Intent(Lists.this,Lists_Inner_List.class);
+                Intent intent = new Intent(Lists.this, Inner_List.class);
                 intent.putExtra("card",lstList.get(position));
                 startActivity(intent);
             }
