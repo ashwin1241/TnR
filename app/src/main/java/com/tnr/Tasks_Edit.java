@@ -34,7 +34,7 @@ public class Tasks_Edit extends AppCompatActivity {
         {
             @Override
             protected Void doInBackground(Void... voids) {
-                databse = Room.databaseBuilder(Tasks_Edit.this, App_Databse.class,"App_Database").build();
+                databse = Room.databaseBuilder(Tasks_Edit.this, App_Databse.class,"TnR_App_Database").build();
                 dao = databse.task_dao();
                 return null;
             }

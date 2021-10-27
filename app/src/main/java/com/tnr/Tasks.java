@@ -37,7 +37,7 @@ public class Tasks extends AppCompatActivity {
         {
             @Override
             protected Void doInBackground(Void... voids) {
-                databse = Room.databaseBuilder(Tasks.this, App_Databse.class,"App_Database").build();
+                databse = Room.databaseBuilder(Tasks.this, App_Databse.class,"TnR_App_Database").build();
                 dao = databse.task_dao();
                 tskList = dao.getAll();
                 return null;

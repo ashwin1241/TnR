@@ -55,7 +55,7 @@ public class Lists extends AppCompatActivity {
 
             @Override
             protected Void doInBackground(Void... voids) {
-                databse = Room.databaseBuilder(Lists.this,App_Databse.class,"App_Database").build();
+                databse = Room.databaseBuilder(Lists.this,App_Databse.class,"TnR_App_Database").build();
                 dao = databse.list_dao();
                 lstList = dao.getAll();
                 return null;

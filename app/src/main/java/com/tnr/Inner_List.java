@@ -58,7 +58,7 @@ public class Inner_List extends AppCompatActivity {
 
             @Override
             protected Void doInBackground(Void... voids) {
-                databse = Room.databaseBuilder(Inner_List.this,App_Databse.class,"App_Database").build();
+                databse = Room.databaseBuilder(Inner_List.this,App_Databse.class,"TnR_App_Database").build();
                 dao = databse.inner_list_dao();
                 innerList = dao.getAll(parent_cid);
                 return null;
